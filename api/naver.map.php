@@ -1,14 +1,21 @@
 <?php
 include "../config/default.php";
 
-if( trim($_POST['query'])){
+if( trim($_POST['query']) || trim($_GET['query'])){
+	if( trim($_POST['query']) )
+		$query  = trim($_POST['query']);
+		
+	if( trim($_GET['query']) )
+		$query  = trim($_GET['query']);
+		
+				
 	$q=1;	
 }else{
-	$query = "ë‹¹ì§„ì‹œ";
+	$query = "´çÁø½Ã";
 	$q=0;
 }
 
-$api_url = "http://openapi.map.naver.com/api/geocode.php?encoding=utf-8&coord=latlng&key=".$naver_api_key."&query=".$query;
+$api_url = "http://openapi.map.naver.com/api/geocode.php?encoding=euc-kr&coord=latlng&key=".$naver_api_key."&query=".$query;
 
 
 $xml = simplexml_load_file($api_url);
