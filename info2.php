@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=euckr" />
 	</head>
-	<body style='margin:10px;'>
+	<body style='margin:10px;' bgcolor='#ffffff'>
 		<table border='0' cellpadding='5' cellspacing='0' width='100%'>
 			<tr>
 				<td><a name='top'><img src='img/ref_word_28.jpg' border='0'><br></a></td>
@@ -69,7 +69,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>주거용</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0052'>2) 산업단지 개발사업</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -88,7 +88,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>공업용</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' bgcolor='#fafafa'>부과면제</td>
@@ -101,7 +101,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>공업용</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0053'>3) 관광단지 조성사업</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -125,7 +125,7 @@
 								◈ 비수도권에서 시행하는 「관광진흥법」에 따른 관광단지 조성사업
 							</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0054'>4) 도시환경정비사업(공장을 건설하는 경우는 제외한다)</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -136,7 +136,7 @@
 								◈ 도시환경정비사업(도시 및 주거환경정비법)
 							</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0055'>5) 물류시설용지 조성사업</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -154,7 +154,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>상업/업무용</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0056'>6) 온천개발사업</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -168,7 +168,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>광천지</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0057'>7) 여객자동차터미널사업</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -181,7 +181,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>여객자동차터미널</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0058'>8) 골프장건설사업</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -194,7 +194,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>골프장</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 					<a name='0059'>9) 지목변경이 수반되는 개발사업(주택, 근린생활시설 등)</a>
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
@@ -367,7 +367,7 @@
 							</td>
 							<td style='border-style:solid;border-color:#eeeeee;' align='center' width='200'>상업ㆍ업무용</td>
 						</tr>
-					</table><center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+					</table><center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 				</td>
 			</tr>
 		</table><br>

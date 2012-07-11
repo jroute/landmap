@@ -9,6 +9,14 @@ $area = new Area();
 $umd = $area->getUMD();
 //print_r($_POST);
 ?>
+<style type="text/css">
+.area {
+	width:60px;
+}
+.jiga {
+	width:75px;
+}
+</style>
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -21,12 +29,21 @@ $(document).ready(function(){
 			$('#RI').append($('<option value="">리 검색</option>'));
 			if( json == false ) return;
 			for(cd in json){
-				if( '<?php echo @$_POST['RI2'];?>' == cd ){
+				if( '<?php echo @$_POST['RI'];?>' == cd ){
 					document.getElementById('RI').options[i++] = new Option(json[cd],cd,true);					
 				}else{
 					document.getElementById('RI').options[i++] = new Option(json[cd],cd);
 				}
 			}
+			
+			if($.browser.msie){
+						document.getElementById('RI').value = '<?php echo $_POST['RI'];?>';
+			}
+			// -- init
+	
+			if( $('#S').val() ){
+				loadData();
+			}			
 		},'json');
 		}
 		
@@ -96,12 +113,12 @@ $(document).ready(function(){
 		
 		var area = 0;
 		$('.area').each(function(){
-			area += parseInt($(this).text(),10);			
+			area += parseInt($(this).val(),10);			
 		});
 		$('#open-area').val(area);
 		var jiga = 0;
 		$('.jiga').each(function(){
-			jiga += parseInt($(this).text(),10);
+			jiga += parseInt($(this).val(),10);
 		});		
 		$('#open-jiga').val(jiga);
 
@@ -114,6 +131,7 @@ $(document).ready(function(){
 	});
 	
 	
+	
 
 	$('#btn-search').bind('click',function(){
 	
@@ -121,7 +139,21 @@ $(document).ready(function(){
 			if( $('#UMD').val() == '' ){ alert('읍/면/동 검색을 선택하십시오'); $('#UMD').focus(); return; }
 			if( $('#S').val() == '' ){ alert('지번을 입력하십시오'); $('#S').focus(); return; }									
 
-			$.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').val(),s:$('#S').val(),e:$('#E').val()},function(json)		{
+			loadData();
+			return false;
+	
+		
+		
+	});	
+	
+
+});
+
+
+
+function loadData(){
+
+$.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').val(),s:$('#S').val(),e:$('#E').val()},function(json)		{
 				$('#jiga-year > tbody > tr').remove();		
 				for(i = 0 ;  i < json.length; i++ ){
 					$('#jiga-year > tbody').append($('<tr><td height="30" width="40" align="center">'+json[i].YEAR+'</td>'+
@@ -172,13 +204,18 @@ $(document).ready(function(){
 					$('#open-address').val(json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi);					
 					
 					var src = "<tr>"
-	src += "<td width='55' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "																	<td width='340'>&nbsp;&nbsp;&nbsp;&nbsp;<span class='addr'>"+json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi+"</span></td>";
-	src += "																	<td width='110' align='right'><span class='area'>"+json.jiga.LAND_AREA+"</span></td>";
-	src += "																	<td width='95' align='right'><span class='jiga'>"+json.jiga.JIGA+"</span></td>";
-	src += "																	<td width='65' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"'></td>";
-	src += "																	<td width='55' align='center'><a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
-	src += "																</tr>";
+	src += "<td width='30' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
+	src += "<td width='150'>&nbsp;&nbsp;<span class='addr'>"+json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi+"</span></td>";
+	
+		src += "<td width='100' align='center'>"+json.jiga.USE+"</td>";
+		src += "<td width='100' align='center'>"+json.jiga.STATE+"</td>";
+		src += "<td width='100' align='center'>"+json.jiga.JIMOK+"</td>";
+			
+	src += "<td width='65' align='right'><input type='text' class='area number' value='"+json.jiga.LAND_AREA+"'/></td>";
+	src += "<td width='75' align='right'><input type='text' class='jiga number' value='"+json.jiga.JIGA+"'/></td>";
+	src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"'></td>";
+	src += "<td width='55' align='center'><a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
+	src += "</tr>";
 	/*
 	src += " 																<tr><td height='1'  background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td background='img/start_point_106.jpg'></td><td background='img/start_point_106.jpg'></td></tr>"; 
 	//*/
@@ -186,13 +223,8 @@ $(document).ready(function(){
 					$('#jiga-area > tbody').append($(src));				
 			},'json');	
 			
-				
-			return false;
-	
-		
-		
-	});		
-});
+
+}
 </script>
 <form id="form" onsubmit="return false" method="post" action="end.php">
 <input type="hidden" name="open_addr" id="open-addr" value="" />
@@ -301,7 +333,7 @@ $(document).ready(function(){
 <select id="UMD" name="UMD">
 <option value="">읍/면/동 검색</option>
 <?php foreach($umd as $cd=>$nm):?>
-<option value="<?=$cd?>" <?php if( @$_POST['UMD2'] == $cd):?>selected="selected"<?php endif;?>><?=$nm?></option>
+<option value="<?=$cd?>" <?php if( @$_POST['UMD'] == $cd):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
 </select>
 											</td>
@@ -314,15 +346,15 @@ $(document).ready(function(){
 											<td width='10'></td>
 											<td>
 <select id="G" name="G">
-<option value="1">지명/지번 검색</option>
-<option value="2">산</option>
-<option value="3">가지번</option>
-<option value="5">블럭</option>
+<option value="1" <?php if( @$_POST['G'] == '1'):?>selected="selected"<?php endif;?>>지명/지번 검색</option>
+<option value="2" <?php if( @$_POST['G'] == '2'):?>selected="selected"<?php endif;?>>산</option>
+<option value="3" <?php if( @$_POST['G'] == '3'):?>selected="selected"<?php endif;?>>가지번</option>
+<option value="5" <?php if( @$_POST['G'] == '5'):?>selected="selected"<?php endif;?>>블럭</option>
 </select>
 											</td>
 											<td width='10'></td>
 											<td>
-<input type="text" name="S" id="S" size="5"/>~<input type="text" name="E" id="E" size="5"/>
+<input type="text" name="S" id="S" size="5" value="<?php echo @$_POST['S'];?>"/>~<input type="text" name="E" id="E" size="5" value="<?php echo @$_POST['E'];?>"/>
 											</td>
 											<td width='10'></td>
 											<td>
@@ -334,7 +366,16 @@ $(document).ready(function(){
 							</tr>
 							<!-- 주소검색 -->
 						</table>
-
+						<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
+						<table border='0' cellpadding='5' cellspacing='0'>
+							<tr>
+								<td><img src='img/start_point_159.jpg' border='0'><br></td>
+								<td><img src='img/start_point_160.jpg' border='0'><br></td>
+								<td width='10' align='center'><img src='img/start_point_162.jpg' border='0'><br></td>
+								<td><input type="image" src='img/start_point_164.jpg' border='0' class="submit"><br></td>
+								<td><input type="image" src='img/start_point_165.jpg' border='0' class="submit"><br></td>
+							</tr>
+						</table>
 						<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 						<table border='0' cellpadding='0' cellspacing='0' width='1010' height='626'>
 							<tr>
@@ -449,7 +490,7 @@ $(document).ready(function(){
 							<tr>
 								<td><img src='img/start_point_159.jpg' border='0'><br></td>
 								<td><img src='img/start_point_160.jpg' border='0'><br></td>
-								<td><img src='img/start_point_162.jpg' border='0'><br></td>
+								<td width='10' align='center'><img src='img/start_point_162.jpg' border='0'><br></td>
 								<td><input type="image" src='img/start_point_164.jpg' border='0' class="submit"><br></td>
 								<td><input type="image" src='img/start_point_165.jpg' border='0' class="submit"><br></td>
 							</tr>
@@ -520,7 +561,11 @@ $(document).ready(function(){
 		<td colspan="2" rowspan="13">
 			<img src="img/101_StartPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<img src="img/101_StartPt_24.jpg" width="157" height="161" alt=""></td>
+			<div id='menu02' style='position:absolute;top:738px;left:41px;width:162px;'>
+			<img src="img/101_StartPt_24.jpg" width="157" height="161" alt=""><br>
+			<table border='0' cellpadding='0' cellspacing='0' height='7'><tr><td></td></tr></table>	
+			</div>
+			</td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="161" alt=""></td>
 	</tr>

@@ -2,22 +2,39 @@
 
 $counter = new Counter();
 
-
-$area = new Area();
-$umd = $area->getUMD();
-
 $info = new Info();
 
 $use = $info->getProperty('02');//용도
 $state = $info->getProperty('06');//토지이용현황
 
 
+	$jiga = new GongsiJiga();
+	
+if( $_POST['USE'] &&  $_POST['STATE'] ){
+	$USE = $_POST['USE'];
+	$STATE = $_POST['STATE']; 
+}else{
+	$END = $jiga->getAreaJiga($_POST['UMD3'],$_POST['RI3'],$_POST['G3'],$_POST['S3'],$_POST['E3']);
+	
+	$USE = $END['USE_REGN1'];
+	$STATE = $END['LAND_USE'];
+}
+
+$area = new Area();
+$umd = $area->getUMD();
+
+
+	
+
+//	$data['jiga'] = $jiga->getAreaJiga($cd);
+$OPEN = $jiga->getAreaJiga($_POST['UMD'],$_POST['RI'],$_POST['G'],$_POST['S'],$_POST['E']);
+
 $sdate = $_POST['sdate'];
 $edate = $_POST['edate'];
 list($sy,$sm,$sd) = explode('-',$sdate);
 list($ey,$em,$ed) = explode('-',$edate);
 
-$lastDate[2] = date('t',mktime(0,0,0,$em,$ed,$ey));
+$lastDate[2] = date('t',mktime(0,0,0,2,1,$ey));
 
 $close_area = (int)$_POST['close_area'];
 $close_jiga = (int)$_POST['close_jiga'];
@@ -97,6 +114,8 @@ $(document).ready(function(){
 //				$('#print-devcost').html($.formatNumber($('#devcost').val(), {format:"#,###", locale:"kr"}));
 				$('#print-devcost').text(json.devcost);
 				
+				$('#print-increases').text(json.increases);
+				
 				$('.number').each(function(){
 						$(this).val(numberFormat($(this).val()));
 					});				
@@ -106,12 +125,15 @@ $(document).ready(function(){
 		
 		// 감면 적용
 		$('#increase').change(function(){
+
 			var val = $(this).val();
 			
 			if( val == '' ) return;
-			
-			red_impact_fees = $('#devimpactfees').val()*val/100;
-			$('#reduction-impact-fees').text(red_impact_fees);
+
+			red_impact_fees = unNumberFormat($('#devimpactfees').val())*val/100;
+
+			$('#reduction-impact-fees').text(numberFormat(String(red_impact_fees)));
+
 		});
 		
 		if( parseInt($('#close-area').val(),10) >= 2700 ){
@@ -123,8 +145,29 @@ $(document).ready(function(){
 });
 </script>
 <form method="post" id="form" action="end.php">
-<input type="hidden" name="UMD" value="<?php echo $_POST['UMD2'];?>" />
-<input type="hidden" name="RI" value="<?php echo $_POST['RI2'];?>" />
+
+
+
+<input type="hidden" name="UMD" value="<?php echo $_POST['UMD'];?>" />
+<input type="hidden" name="RI" value="<?php echo $_POST['RI'];?>" />
+
+<input type="hidden" name="UMD2" value="<?php echo $_POST['UMD2'];?>" />
+<input type="hidden" name="RI2" value="<?php echo $_POST['RI2'];?>" />
+
+<input type="hidden" name="UMD3" value="<?php echo $_POST['UMD3'];?>" />
+<input type="hidden" name="RI3" value="<?php echo $_POST['RI3'];?>" />
+
+
+<input type="hidden" name="G" value="<?php echo $_POST['G'];?>" />
+<input type="hidden" name="S" value="<?php echo $_POST['S'];?>" />
+<input type="hidden" name="E" value="<?php echo $_POST['E'];?>" />
+
+<input type="hidden" name="G3" value="<?php echo $_POST['G3'];?>" />
+<input type="hidden" name="S3" value="<?php echo $_POST['S3'];?>" />
+<input type="hidden" name="E3" value="<?php echo $_POST['E3'];?>" />
+
+<input type="hidden" name="USE" value="<?php echo $_POST['USE'];?>" />
+<input type="hidden" name="STATE" value="<?php echo $_POST['STATE'];?>" />
 
 <input type="hidden" name="sdate" value="<?php echo $_POST['sdate'];?>" />
 <input type="hidden" name="edate" value="<?php echo $_POST['edate'];?>" />
@@ -183,7 +226,7 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="8">
-			<img src="img/103_DevPt_12.jpg" width="261" height="17" alt=""></td>
+			</td>
 		<td>
 			<img src="img/103_DevPt_13.jpg" width="17" height="17" alt=""></td>
 		<td colspan="15">
@@ -274,27 +317,88 @@ while($data = mysql_fetch_assoc($res)):
 										</tr>
 									</table>
 								</td>
-								
 							</tr>
 							<!-- 주소검색 -->
+						</table>
+						<table border='0' cellpadding='0' cellspacing='4' width='1010' height='45' style='font-family:dotum;font-size:10px;' bgcolor='#d6e6f6'>
+							<tr>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='50'>개발기간</td>
+								<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'>
+								<?php echo $_POST['sdate'];?> ~ <?php echo $_POST['edate'];?> 
+								</td>
+							</tr>
+							<tr>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>개시시점</td>
+								<td style='padding:0 0 0 0;'>
+									<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+										<tr bgcolor='#e3effb'>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25'>대표지번</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>총면적</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>공시지가</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>용도지역</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>토지이용상황</td>
+										</tr>
+										<tr>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo $_POST['open_address'];?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_area']);?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_jiga']);?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $use[$OPEN['USE_REGN1']];?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $state[$OPEN['LAND_USE']];?></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='30'>종료시점</td>
+								<td style='padding:0 0 0 0;'>
+									<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+										<tr bgcolor='#e3effb'>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25'>총면적</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>공시지가</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>용도지역</td>
+											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>토지이용상황</td>
+										</tr>
+										<tr>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo number_format($_POST['close_area']);?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['close_jiga']);?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $use[$USE];?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'	><?php echo $state[$STATE];?></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 						</table>
 						<table border='0' cellpadding='0' cellspacing='0' width='1010' bgcolor='#d6e6f6' height='45'>
 							<tr>
 								<td width='20'></td>
 								<td><img src='img/dev_point_79.jpg' border='0'><br></td>
-								<td align='right' style='font-size:22px;font-weight:bold;' ><?php echo number_format($_POST['open_cal_jiga']);?></td>
-								<td width='20'></td>
-								<td width='20'></td>
+								<td width='10'></td>
+								<td align='right' style='font-size:16px;font-weight:bold;' ><?php echo number_format($_POST['open_cal_jiga']);?></td>
+								<td width='10'></td>
 								<td><img src='img/dev_point_82.jpg' border='0'><br></td>
-								<td align='right' style='font-size:22px;font-weight:bold;' ><?php echo number_format($close_cal_jiga);?></td>
-								<td width='20'></td>
-								<td width='20'></td>
+								<td width='10'></td>	
+								<td align='right' style='font-size:16px;font-weight:bold;' ><?php echo number_format($close_cal_jiga);?></td>
+								<td width='10'></td>
 								<td><img src='img/dev_point_84.jpg' border='0'><br></td>
-								<td align='right' style='font-size:22px;font-weight:bold;' ><span id="print-devcost" style='font-size:22px;font-weight:bold;color:#0078ff;' ><?php echo number_format($calcost[1]);?></span></td>
+								<td width='10'></td>
+								<td align='right' style='font-size:16px;font-weight:bold;' ><span id="print-devcost" style='font-size:16px;font-weight:bold;color:#0078ff;' ><?php echo number_format($calcost[1]);?></span></td>
+								<td width='10'></td>
+								<td><img src='img/dev_point_84_1.jpg' border='0'><br></td>
+								<td width='10'></td>
+								<td align='right' style='font-size:16px;font-weight:bold;' ><span id="print-increases" style='font-size:16px;font-weight:bold;color:#0078ff;' >0</span></td>
 								<td width='20'></td>
 							</tr>
 						</table>
-							
+						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
+						<table border='0' cellpadding='5' cellspacing='0'>
+							<tr>
+								<td><input type="image" src='img/dev_point_126.jpg' border='0'><br></td>
+								<td><img src='img/dev_point_127.jpg' border='0'><br></td>
+								<td align='center' width='10'><img src='img/end_point_169.jpg' border='0'><br></td>
+								<td><img src='img/dev_point_131.jpg' border='0'><br></td>
+								<td><img src='img/dev_point_132.jpg' border='0'><br></td>
+							</tr>
+						</table>	
 						<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 						<table border='0' cellpadding='0' cellspacing='0' width='1011' height='534'>
 							<tr>
@@ -362,7 +466,7 @@ while($data = mysql_fetch_assoc($res)):
 							<tr>
 								<td><input type="image" src='img/dev_point_126.jpg' border='0'><br></td>
 								<td><img src='img/dev_point_127.jpg' border='0'><br></td>
-								<td><img src='img/end_point_169.jpg' border='0'><br></td>
+								<td align='center' width='10'><img src='img/end_point_169.jpg' border='0'><br></td>
 								<td><img src='img/dev_point_131.jpg' border='0'><br></td>
 								<td><img src='img/dev_point_132.jpg' border='0'><br></td>
 							</tr>
@@ -432,7 +536,10 @@ while($data = mysql_fetch_assoc($res)):
 		<td colspan="2" rowspan="13">
 			<img src="img/103_DevPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<img src="img/103_DevPt_24.jpg" width="157" height="161" alt=""></td>
+			<div id='menu02' style='position:absolute;top:735px;left:41px;width:162px;'>
+			<img src="img/103_DevPt_24.jpg" width="157" height="161" alt="">
+			</div>
+			</td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="161" alt=""></td>
 	</tr>

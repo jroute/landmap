@@ -1,16 +1,18 @@
 <script type="text/javascript">
-			try {document.execCommand('BackgroundImageCache', false, true);} catch(e) {}
+	if( $.browser.version == '6.0' ){
+		try {document.execCommand('BackgroundImageCache', false, true);} catch(e) {}
+	}
 
 </script>
 
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=<?=$naver_api_key?>"></script>
 
 
-<div id = "naver-map" style="border:1px solid #000; width:536px; height:306px; margin:0px;"></div>
+<div id="navermap" style="border:1px solid #000; width:536px; height:306px; margin:0px;"></div>
 		<script type="text/javascript">
 			var oPoint = new nhn.api.map.LatLng(36.8936490, 126.6281630);
 			nhn.api.map.setDefaultPoint('LatLng');
-			oMap = new nhn.api.map.Map('naver-map' ,{
+			oMap = new nhn.api.map.Map('navermap' ,{
 						point : oPoint, 
 						zoom : 10,
 						enableWheelZoom : true,

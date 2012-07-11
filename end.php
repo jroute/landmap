@@ -1,5 +1,45 @@
 <?php include "inc/header.php"; 
 
+if( isset($_POST['UMD2']) ){
+	$UMD2 = $_POST['UMD2'];
+}else{
+	$UMD2 = $_POST['UMD'];
+}
+if( isset($_POST['UMD3']) ){
+	$UMD3 = $_POST['UMD3'];
+}else{
+	$UMD3 = $_POST['UMD'];
+}
+
+if( isset($_POST['RI3']) ){
+	$RI3 = $_POST['RI3'];
+}else{
+	$RI3 = $_POST['RI'];
+}
+
+if( isset($_POST['RI2']) ){
+	$RI2 = $_POST['RI2'];
+}else{
+	$RI2 = $_POST['RI'];
+}
+
+if( isset($_POST['G3']) ){
+	$G3 = $_POST['G3'];
+}else{
+	$G3 = $_POST['G'];
+}
+
+if( isset($_POST['S3']) ){
+	$S3 = $_POST['S3'];
+}else{
+	$S3 = $_POST['S'];
+}
+
+if( isset($_POST['E3']) ){
+	$E3 = $_POST['E3'];
+}else{
+	$E3 = $_POST['E'];
+}
 
 $counter = new Counter();
 
@@ -15,7 +55,7 @@ $state = $info->getProperty('06');//토지이용현황
 $sdate = $_POST['sdate'];
 list($sy,$sm,$sd) = explode('-',$sdate);
 
-$lastDate[2] = date('t',mktime(0,0,0,$sm,$sd,$sy));
+$lastDate[2] = date('t',mktime(0,0,0,2,1,$sy));
 
 $open_area = (int)$_POST['open_area'];
 $open_jiga = (int)$_POST['open_jiga'];
@@ -64,9 +104,9 @@ $(document).ready(function(){
 
 
 
-	if( parseInt($('#open-area').val(),10) > 2700 ){
-		alert('면적이 2700m2 넘었습니다. 표준개발비용으로 산정할 수 없습니다.');
-	}
+	//if( parseInt($('#open-area').val(),10) > 2700 ){
+	//	alert('면적이 2700m2 넘었습니다. 표준개발비용으로 산정할 수 없습니다.');
+	//}
 
 	$('#lnk-info').click(function(){
 		window.open('info2.php','info','width=820,height=700,scrollbars=yes');
@@ -117,25 +157,68 @@ $(document).ready(function(){
 
 	});	
 
-		var val = $('#UMD2').val();
+		var umd3 = $('#UMD').val();
+		var umd2 = $('#UMD2').val();
 
-		$.post('/json/ri.php',{q:val},function(json){
-			i = 1;
-			$('#RI2 > option').remove();
-			$('#RI2').append($('<option value="">리 검색</option>'));
-			if( json == false ) return;
-			for(cd in json){
-				if( '<?php echo $_POST['RI'];?>' == cd ){
-					document.getElementById('RI2').options[i++] = new Option(json[cd],cd,true);					
-				}else{
-					document.getElementById('RI2').options[i++] = new Option(json[cd],cd);
+		if( umd3 ){
+
+			$.post('/json/ri.php',{q:umd3},function(json){
+				try{
+				var j = 1;
+				$('#RI > option').remove();
+				$('#RI').append($('<option value="">리 검색</option>'));
+				if( json != false ){
+					for(cd in json){
+
+						if( '<?php echo $RI3;?>' == cd ){						
+							//document.getElementById('RI').options[j++] = new Option(json[cd],cd,true);					
+							$('#RI').append($('<option value="'+cd+'" selected="selected">'+json[cd]+'</option>'));					
+						}else{
+							//document.getElementById('RI').options[j++] = new Option(json[cd],cd);	
+							$('#RI').append($('<option value="'+cd+'">'+json[cd]+'</option>'));	
+						}
+					}
+					
+					if($.browser.msie){
+						document.getElementById('RI').value = '<?php echo $RI3;?>';
+					}
 				}
-			}
-		},'json');
+				}catch(e){alert(e.message);}
+				
+			},'json');
+		}//end .post umd3
+		
+		if( umd2 ){
+			$.post('/json/ri.php',{q:umd2},function(json){
+				var i = 1;
+				$('#RI2 > option').remove();
+				$('#RI2').append($('<option value="">리 검색</option>'));
+				if( json != false ){
+					for(cd in json){
+						if( '<?php echo $RI2;?>' == cd ){
+							document.getElementById('RI2').options[i++] = new Option(json[cd],cd,true);					
+						}else{
+							document.getElementById('RI2').options[i++] = new Option(json[cd],cd);
+						}
+					}
+					if($.browser.msie){
+						document.getElementById('RI2').value = '<?php echo $RI2;?>'
+					}					
+				}
+				
+					//init 
+				if( $('#USE').val() && $('#STATE').val()  ){
+					loadStateData();
+				}
+			},'json');
+		}//end .post umd2
 
-	
+	$('#USE').change(function(){
+			$('#STATE').val('');//reset;
+	});
 	$('#STATE').change(function(){
 		var val = $(this).val();
+				$('#jiga-area > tbody > tr').remove();
 		if( val == '' ) return;
 		
 		if( $('#USE').val() == '' ){
@@ -144,25 +227,8 @@ $(document).ready(function(){
 			$(this).val('');
 			return;
 		}
-		
 
-			$.post('/json/jiga_state.php',{umd:$('#UMD2').val(),ri:$('#RI2').val(),use:$('#USE').val(),state:$('#STATE').val()},function(json)		{
-					if( json.jiga.length == 0 ){
-						alert('데이터가 존재하지 않습니다.');
-						return;
-					}
-					for(i = 0 ; i < json.jiga.length ; i++ ){
-					var src = "<tr>"
-	src += "<td width='55' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "																	<td width='470'>&nbsp;&nbsp;&nbsp;&nbsp;<span class='addr'>"+json.addr.UMD_NM+' '+json.addr.RI_NM+"</span></td>";
-	src += "																	<td width='175' align='center'>"+$('#STATE option:selected').text()+"</td>";
-	src += "																	<td width='175' align='right'><span class='jiga'>"+numberFormat(json.jiga[i].JIGA)+"</span></td>";
-	src += "																	<td align='center'><input type='radio' name='addr' class='seladdr'></td>";
-	src += "																</tr>";
-																	
-					$('#jiga-area > tbody').append($(src));				
-					}
-			},'json');	
+		loadStateData();
 		
 		
 	});
@@ -197,13 +263,57 @@ $(document).ready(function(){
 		$('.number').each(function(){
 			$(this).val(unNumberFormat($(this).val()));
 		});
+		
+		if( $('#close-jiga').val() == '0' ){
+			alert('지가 금액을 확인하십시오');
+			$('#close-jiga').focus();
+			return;
+		}
 		document.getElementById('form').submit();
 	});
+
 });
+
+function loadStateData(){
+
+			$.post('/json/jiga_state.php',{umd:$('#UMD2').val(),ri:$('#RI2').val(),use:$('#USE').val(),state:$('#STATE').val()},function(json)		{
+				$('#jiga-area > tbody > tr').remove();
+					if( json.jiga.length == 0 ){
+						alert('데이터가 존재하지 않습니다.');
+						return;
+					}
+
+					for(i = 0 ; i < json.jiga.length ; i++ ){
+					var src = "<tr>"
+	src += "<td width='55' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
+	src += "<td width='270'>&nbsp;&nbsp;<span class='addr'>"+json.addr.UMD_NM+' '+json.addr.RI_NM+ "</span></td>";
+	
+	src += "<td width='100' align='center'>"+$('#USE option:selected').text()+"</td>";
+	src += "<td width='100' align='center'>"+$('#STATE option:selected').text()+"</td>";
+
+	src += "<td width='70' align='center'>" + json.jiga[i].JIMOK+"</td>";	
+	src += "<td width='100' align='right'><span class='area'>"+numberFormat(json.jiga[i].LAND_AREA)+"</span></td>";	
+	
+	src += "<td width='125' align='right'><span class='jiga'>"+numberFormat(json.jiga[i].JIGA)+"</span></td>";
+	src += "<td width='70' align='center'><input type='radio' name='addr' class='seladdr'></td>";
+	src += "																</tr>";
+																	
+					$('#jiga-area > tbody').append($(src));				
+					}
+			},'json');	
+}
 </script>
 <form method="post" id="form" action="finish.php" onsubmit="return false;">
 <input type="hidden" name="sdate" value="<?php echo $_POST['sdate'];?>" />
 <input type="hidden" name="edate" value="<?php echo $_POST['edate'];?>" />
+
+<input type="hidden" name="UMD" value="<?php echo $_POST['UMD'];?>" />
+<input type="hidden" name="RI" value="<?php echo $_POST['RI'];?>" />
+
+<input type="hidden" name="G" value="<?php echo $_POST['G'];?>" />
+<input type="hidden" name="S" value="<?php echo $_POST['S'];?>" />
+<input type="hidden" name="E" value="<?php echo $_POST['E'];?>" />
+
 
 <input type="hidden" name="open_addr" id="open-addr" value="<?php echo $_POST['open_addr'];?>" />
 <input type="hidden" name="open_address" id="open-address" value="<?php echo $_POST['open_address'];?>" />
@@ -282,31 +392,31 @@ $(document).ready(function(){
 											<td><img src='img/start_point_49.jpg' border='0'><br></td>
 											<td width='10'></td>
 											<td>
-<select id="UMD">
+<select id="UMD" name="UMD3">
 <option value="">읍/면/동 검색</option>
 <?php foreach($umd as $cd=>$nm):?>
-<option value="<?=$cd?>"><?=$nm?></option>
+<option value="<?=$cd?>" <?php if( $UMD3 == $cd ):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
 </select>
 											</td>
 											<td width='10'></td>
 											<td>
-<select id="RI">
+<select id="RI" name="RI3" style="width:90px">
 <option value="">리 검색</option>
 </select>
 											</td>
 											<td width='10'></td>
 											<td>
-<select id="G">
-<option value="1">지명/지번 검색</option>
-<option value="2">산</option>
-<option value="3">가지번</option>
-<option value="5">블럭</option>
+<select id="G" name="G3">
+<option value="1" <?php if( @$G3 == '1'):?>selected="selected"<?php endif;?>>지명/지번 검색</option>
+<option value="2" <?php if( @$G3 == '2'):?>selected="selected"<?php endif;?>>산</option>
+<option value="3" <?php if( @$G3 == '3'):?>selected="selected"<?php endif;?>>가지번</option>
+<option value="5" <?php if( @$G3 == '4'):?>selected="selected"<?php endif;?>>블럭</option>
 </select>
 											</td>
 											<td width='10'></td>
 											<td>
-<input type="text" name="S" id="S" size="5"/>~<input type="text" name="E" id="E" size="5"/>
+<input type="text" name="S3" id="S" size="5" value="<?php echo $S3;?>"/>~<input type="text" name="E3" id="E" size="5" value="<?php echo $E3;?>"/>
 											</td>
 											<td width='10'></td>
 											<td>
@@ -317,6 +427,16 @@ $(document).ready(function(){
 								</td>
 							</tr>
 							<!-- 주소검색 -->
+						</table>
+						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
+						<table border='0' cellpadding='5' cellspacing='0'>
+							<tr>
+								<td><a href="#" class="btn-back"><img src='img/end_point_166.jpg' border='0'></a><br></td>
+								<td><a href="#" class="btn-back"><img src='img/end_point_167.jpg' border='0'></a><br></td>
+								<td width='10' align='center'><img src='img/end_point_169.jpg' border='0'><br></td>
+								<td><input type="image" src='img/end_point_171.jpg' border='0' class="submit"><br></td>
+								<td><input type="image" src='img/end_point_172.jpg' border='0' class="submit"><br></td>
+							</tr>
 						</table>
 						<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 						<table border='0' cellpadding='0' cellspacing='0' width='1010' height='61'>
@@ -347,7 +467,7 @@ $(document).ready(function(){
 <select id="UMD2" name="UMD2">
 <option value="">읍/면/동 검색</option>
 <?php foreach($umd as $cd=>$nm):?>
-<option value="<?=$cd?>" <?php if( $cd == $_POST['UMD'] ):?>selected="selected"<?php endif;?>><?=$nm?></option>
+<option value="<?=$cd?>" <?php if( $cd == $UMD2 ):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
 </select>
 																				</td>
@@ -359,19 +479,19 @@ $(document).ready(function(){
 																				</td>
 																				<td width='10'></td>
 																				<td>
-<select id="USE">
+<select id="USE" name="USE">
 <option value="">용도지역 선택</option>
 <?php foreach($use as $cd=>$nm):?>
-<option value="<?=$cd?>"><?=$nm?></option>
+<option value="<?=$cd?>" <?php if( @$_POST['USE'] == $cd ):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
 </select>
 																				</td>
 																				<td width='10'></td>
 																				<td>
-<select id="STATE">
+<select id="STATE" name="STATE">
 <option value="">토지이용현황 선택</option>
 <?php foreach($state as $cd=>$nm):?>
-<option value="<?=$cd?>"><?=$nm?></option>
+<option value="<?=$cd?>" <?php if( @$_POST['STATE'] == $cd ):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
 </select>
 																				</td>
@@ -426,8 +546,8 @@ $(document).ready(function(){
 														</tr>
 														<tr><td height='18'></td></tr>
 														<tr>
-															<td align='right' style='font-size:22px;font-weight:bold;font-family:dotum;'>
-																<?php echo $_POST['open_addr'];?>&nbsp;&nbsp;&nbsp;
+															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
+																<?php echo $_POST['open_address'];?>&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -438,8 +558,8 @@ $(document).ready(function(){
 														</tr>
 														<tr><td height='18'></td></tr>
 														<tr>
-															<td align='right' style='font-size:22px;font-weight:bold;font-family:dotum;'>
-																<input type="text" size="10" style='border:0px;height:24px;font-size:22px;font-weight:bold;' name="close_area" id="close_area" class="number" value="<?php echo number_format($_POST['open_area']);?>"/> m2&nbsp;&nbsp;&nbsp;
+															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
+																<input type="text" size="10" style='border:0px;height:24px;font-size:22px;font-weight:bold;' name="close_area" id="close_area" class="number" value="<?php echo number_format($_POST['open_area']);?>"/> m<sup>2</sup>&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -450,8 +570,8 @@ $(document).ready(function(){
 														</tr>
 														<tr><td height='18'></td></tr>
 														<tr>
-															<td align='right' style='font-size:22px;font-weight:bold;font-family:dotum;'>
-																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="15"  class="number" id="close-jiga" value="0"/>&nbsp;&nbsp;&nbsp;
+															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
+																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="0"/>&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -518,7 +638,7 @@ $(document).ready(function(){
 							<tr>
 								<td><a href="#" class="btn-back"><img src='img/end_point_166.jpg' border='0'></a><br></td>
 								<td><a href="#" class="btn-back"><img src='img/end_point_167.jpg' border='0'></a><br></td>
-								<td><img src='img/end_point_169.jpg' border='0'><br></td>
+								<td width='10' align='center'><img src='img/end_point_169.jpg' border='0'><br></td>
 								<td><input type="image" src='img/end_point_171.jpg' border='0' class="submit"><br></td>
 								<td><input type="image" src='img/end_point_172.jpg' border='0' class="submit"><br></td>
 							</tr>
@@ -587,7 +707,11 @@ $(document).ready(function(){
 		<td colspan="2" rowspan="13">
 			<img src="img/102_EndPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<img src="img/102_EndPt_24.jpg" width="157" height="161" alt=""></td>
+			<div id='menu02' style='position:absolute;top:737px;left:41px;width:162px;'>
+			<img src="img/102_EndPt_24.jpg" width="157" height="161" alt=""><br>
+			<table border='0' cellpadding='0' cellspacing='0' height='5'><tr><td></td></tr></table>	
+			</td>
+			</div>
 		<td>
 			<img src="img/spacer.gif" width="1" height="161" alt=""></td>
 	</tr>

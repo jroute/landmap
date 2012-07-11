@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR" />
 	</head>
-	<body style='margin:10px;'>
+	<body style='margin:10px;' bgcolor='#ffffff'>
 		<table border='0' cellpadding='5' cellspacing='0'>
 			<tr>
 				<td><a name='top'><img src='img/ref_word_28.jpg' border='0'><br></a></td>
@@ -26,7 +26,7 @@
 				</td>
 			</tr>
 		</table>
-		<center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+		<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 		<img src='img/sep55.jpg' border='0' width='950'><br><br>
 		<table border='0' cellpadding='5' cellspacing='0' width='100%'>
 			<tr>
@@ -40,7 +40,7 @@
 				</td>
 			</tr>
 		</table><br>
-		<center><br><a href='#top' style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>위로</a></center>
+		<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 		<img src='img/sep55.jpg' border='0' width='950'><br><br>
 		<table border='0' cellpadding='5' cellspacing='0' width='100%'>
 			<tr>
@@ -78,7 +78,7 @@
 						</tr>
 					</table>
 					<font color='#ff0000'>※. 토지소유자</font> : 부과종료시점 당시 토지를 소유한 자(등기부등본에 기재된 토지소유자)
-					<center><br><a href='#top'>위로</a></center>
+					<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 
 				</td>
 			</tr>
@@ -138,7 +138,7 @@
 					&nbsp;&nbsp;&nbsp;- 협동화사업단지조성사업(중소기업진흥 및 구매촉진에 관한 법률)의 경우에는 참여한 중소기업자별 면적의 토지에 각각의 개발사업이 시행되는 것으로 봅니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(영 제4조 제3항)<br>
 					&nbsp;&nbsp;&nbsp;- 시행령 별표1 제9호에 따른 지목변경이 수반되는 개발사업의 경우 사실상 또는 공부상 지목이 변경되는 면적을 부과대상 기준면적으로 합니다.(영 제4조 제4항)<br>
 					&nbsp;&nbsp;&nbsp;- 부과중지기간에 인가등을 받은 사업의 토지면적은 제외합니다.(영부칙 제4조)
-					<center><br><a href='#top'>위로</a></center>
+					<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
 				</td>
 			</tr>
 		</table><br>

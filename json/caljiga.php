@@ -73,10 +73,15 @@ $dev_gain_fees = $close_cal_jiga - ($open_cal_jiga + $increases_total + $devcost
 trace("dev_gain_fees :  ".$dev_gain_fees." = ".$close_cal_jiga." - (".$open_cal_jiga." + ".$increases_total." + ".$devcost.")");			
 
 //개발부담금
-$dev_impact_fees = $dev_gain_fees*0.025;
-trace("dev_impact_fees :  ".$dev_impact_fees." = ".$dev_gain_fees." * 0.025");			
+$dev_impact_fees = intval($dev_gain_fees*0.25);
+trace("dev_impact_fees :  ".$dev_impact_fees." = ".$dev_gain_fees." * 0.25");			
 
-$data = array('dev_impact_fees'=>number_format($dev_impact_fees),'devcost'=>number_format($devcost));
+//개발부담금 10단위 절사
+$dev_impact_fees = substr((String)$dev_impact_fees,0,-1).'0';
+
+$data = array('dev_impact_fees'=>number_format($dev_impact_fees),
+	'devcost'=>number_format($devcost),
+	'increases'=>number_format($increases_total));
 
 echo json_encode($data);
 	

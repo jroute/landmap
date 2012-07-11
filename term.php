@@ -12,8 +12,7 @@ $counter = new Counter();
 			<img src="img/spacer.gif" width="1" height="26" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2" rowspan="8">
-			<img src="img/104_wrdPt_02.jpg" width="35" height="219" alt=""></td>
+		<td colspan="2" rowspan="8">&nbsp;</td>
 		<td colspan="2" rowspan="3">
 			<img src="img/104_wrdPt_03.jpg" width="142" height="72" alt=""></td>
 		<td colspan="29">
@@ -22,11 +21,10 @@ $counter = new Counter();
 			<img src="img/spacer.gif" width="1" height="19" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2" rowspan="7">
-			<img src="img/104_wrdPt_05.jpg" width="21" height="200" alt=""></td>
+		<td colspan="2" rowspan="7">&nbsp;</td>
 		<td colspan="25">
 			<img src="img/104_wrdPt_06.jpg" width="1048" height="48" alt=""></td>
-		<td rowspan="13" >
+		<td rowspan="13" valign='top'>
 			<img src="img/104_wrdPt_07.jpg" width="14" height="897" alt=""></td>
 		<td rowspan="23">
 			<img src="img/104_wrdPt_08.jpg" width="20" height="979" alt=""></td>
@@ -34,7 +32,7 @@ $counter = new Counter();
 			<img src="img/spacer.gif" width="1" height="48" alt=""></td>
 	</tr>
 	<tr>
-		<td rowspan="22">
+		<td rowspan="22" valign='top'>
 			<img src="img/104_wrdPt_09.jpg" width="7" height="931" alt=""></td>
 		<td colspan="24" rowspan="2">
 			<img src="img/104_wrdPt_10.jpg" width="1041" height="8" alt=""></td>
@@ -42,69 +40,66 @@ $counter = new Counter();
 			<img src="img/spacer.gif" width="1" height="5" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2" rowspan="3">
-			<img src="img/104_wrdPt_11.jpg" width="142" height="50" alt=""></td>
+		<td colspan="2" rowspan="5" valign='top'><br><br><br>
+			<img src="img/104_wrdPt_17.jpg" width="142" height="79" alt=""></td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="3" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<td height="33" colspan="2" valign='top'>
 			<img src="img/104_wrdPt_12.jpg" width="28" height="17" alt=""></td>
-		<td>
+		<td valign='top'>
 			<img src="img/104_wrdPt_13.jpg" width="17" height="17" alt=""></td>
-		<td colspan="9">
+		<td colspan="9" valign='top'>
 			<img src="img/104_wrdPt_14.jpg" width="339" height="17" alt=""></td>
-		<td colspan="12">
-			<img src="img/104_wrdPt_15.jpg" width="657" height="17" alt=""></td>
+		<td colspan="12"><p>&nbsp;</p></td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="17" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="24" rowspan="8">
-<!-- 내용 들어가는 부분 시작	---------------------------------------------------------------------------------------------------------------------------->		
-			<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
-			<table border='0' cellpadding='0' cellspacing='0' width='1048' height='770'>
+<!-- 내용 들어가는 부분 시작	---------------------------------------------------------------------------------------------------------------------------->
+			
+				<table border='0' cellpadding='0' cellspacing='0' width='1048' height='770'>
 				<tr>
 					<td align='center' valign='bottom'>
 						<table border='0' cellspacing='0' cellpadding='20' background='img/refbg.jpg' width='1011' height='770'>
-							<tr><td>
+							<tr><td align='center'>
 								<table border='0' cellspacing='10' cellpadding='0' width='1011' height='56'>
-									<tr><td bgcolor='#f6f6f6' style='font-family:dotum;font-size:14px;'>
+									<tr><td bgcolor='#f6f6f6' style='font-family:dotum;font-size:14px;' align='center'>
 										<a href='./info.php#001' target='dev_info'><b>개발부담금이란?</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href='./info.php#003' target='dev_info'><b>납부의무자</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href='./info.php#004' target='dev_info'><b>부과대상</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href='javascript:window.open("info2.php","_new","width=1024,height=768,left=500,top=300,scrollbars=yes,address=no");' target="_new"><b>사업종류</b></a>
 									</td></tr>
 								</table>
-								<iframe name='dev_info' src='info.php' width='1001' height='705' frameborder='0' ></iframe>
+								<iframe name='dev_info' src='info.php' width='1001' height='2565' frameborder='0' scrolling='no'></iframe>
 							</td></tr>
 						</table>
+						<table border='0' cellspacing='0' cellpadding='20' background='img/refbg.jpg' width='1011' height='4'>
+							<tr><td></td></tr>
+						</table><br>
 					</td>
-				</tr>
-			</table>
+			  </tr>
+		  </table>
+		  
 
 <!-- 내용 들어가는 부분 끝		---------------------------------------------------------------------------------------------------------------------------->				
-		</td>
+	  </td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="30" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<img src="img/104_wrdPt_17.jpg" width="142" height="79" alt=""></td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="79" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<img src="img/104_wrdPt_18.jpg" width="142" height="18" alt=""></td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="18" alt=""></td>
 	</tr>
 	<tr>
-		<td rowspan="16">
-			<img src="img/104_wrdPt_19.jpg" width="30" height="779" alt=""></td>
-		<td colspan="4" >
-			<img src="img/104_wrdPt_20.jpg" width="162" height="29" alt=""></td>
+		<td rowspan="16">&nbsp;</td>
+		<td colspan="4" ></td>
 		<td rowspan="3">
 			<img src="img/104_wrdPt_21.jpg" width="6" height="485" alt=""></td>
 		<td>
@@ -113,9 +108,10 @@ $counter = new Counter();
 	<tr>
 		<td colspan="4">
 <!-- 레프트 메뉴 시작 ------------------------------------------------------------------------------------------------------------------------------------>
-
-			<table border='0' cellpadding='0' cellspacing='0' width='100%' bgcolor='#eef2f5' height='73'>
-				<tr><td height='3'></td><td height='3'></td></tr>
+<div id='menu01' style='position:absolute;top:245px;left:30px;width:162px;'>
+			<img src="img/104_wrdPt_20.jpg" width="162" height="29" alt="" /><br>
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' bgcolor='#eef2f5' height='72'>
+				<tr><td height='2'></td><td height='2'></td></tr>
 				<tr>
 					<td height='20'></td><td style='color:333333;font-family:dotum;font-size:12px;'><a href="index.php" style='font-family:dotum;font-size:12px;'>개발부담금 가산정</a></td>
 				</tR>
@@ -128,7 +124,7 @@ $counter = new Counter();
 				</tR>
 				<tr><td height='3'></td><td height='3'></td></tr>
 			</table>
-
+</div>
 
 <!-- 레프트 메뉴 끝   ------------------------------------------------------------------------------------------------------------------------------------>					
 		</td>
@@ -136,21 +132,23 @@ $counter = new Counter();
 			<img src="img/spacer.gif" width="1" height="72" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="4">
-			<img src="img/104_wrdPt_23.jpg" width="162" height="384" alt=""></td>
+		<td height="546" colspan="4" valign='top' align='right'>
+		<div id='menu02' style='position:absolute;top:730px;left:36px;width:162px;'>
+			<img src="img/104_wrdPt_25.jpg" width="157" height="161" alt="" />
+		</div>
+		</td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="384" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="2" rowspan="13">
 			<img src="img/104_wrdPt_24.jpg" width="11" height="294" alt=""></td>
-		<td colspan="3" >
-			<img src="img/104_wrdPt_25.jpg" width="157" height="161" alt=""></td>
+		<td colspan="3" >&nbsp;</td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="161" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="3" rowspan="12">
+		<td colspan="3" rowspan="12" height='100%'>
 			<img src="img/104_wrdPt_26.jpg" width="157" height="133" alt=""></td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="23" alt=""></td>
@@ -347,6 +345,7 @@ $counter = new Counter();
 		<td></td>
 	</tr>
 </table>
+<blockquote>&nbsp;</blockquote>
 <!-- End Save for Web Slices -->
 </body>
 </html>

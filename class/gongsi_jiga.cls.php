@@ -47,18 +47,16 @@ class GongsiJiga {
 			$e = $e ? sprintf('%04d',trim($e)):'0000';
 			
 			$cd = $umd.$ri.$g.$s.$e;		
-	  $query      = "SELECT LAND_CD,LAND_AREA,JIGA FROM LAND WHERE LAND_CD='44270".$cd."'";
+	  $query      = "SELECT LAND_CD,LAND_AREA,JIGA,LAND_USE,USE_REGN1,JIMOK FROM LAND WHERE LAND_CD='44270".$cd."'";
     trace("지역별 공시지가 쿼리 : ".$query);
 //echo $query;
     $result     = mysql_query($query,$this->conn);
     trace("지역별 공시지가 rows : ".mysql_num_rows($result));  
     
-    $jiga = mysql_fetch_array($result);
+    $jiga = mysql_fetch_assoc($result);
     
 	  mysql_free_result($result);
 	  
-//	  	$jiga['JIGA']= '42000';
-//	  	$jiga['LAND_AREA']= '420';	  	
 	  	
 	    return $jiga;
 	}
@@ -75,7 +73,7 @@ class GongsiJiga {
 			$state = $state ? sprintf('%03d',trim($state)):'000';
 
 			
-	  $query      = "SELECT LAND_CD,LAND_AREA,JIGA FROM LAND WHERE SIDOSGG_CD='44270' AND UMD_CD='$umd' AND RI_CD='$ri' AND USE_REGN1='$use' AND LAND_USE='$state' group by JIGA";
+	  $query      = "SELECT LAND_CD,LAND_AREA,JIGA,JIMOK FROM LAND WHERE SIDOSGG_CD='44270' AND UMD_CD='$umd' AND RI_CD='$ri' AND USE_REGN1='$use' AND LAND_USE='$state'";// group by JIGA";
     trace("State Jiga query : ".$query);  
 
 

@@ -3,6 +3,7 @@
 include "../config/default.php"; 
 include "../config/database.php"; 
 include "../class/area.cls.php"; 
+include "../class/info.cls.php"; 
 include "../class/gongsi_jiga.cls.php"; 
 
 
@@ -13,14 +14,20 @@ include "../class/gongsi_jiga.cls.php";
 	$use = trim($_POST['use']);
 	$state = trim($_POST['state']);			
 				
+	$info = new Info();
+
+	$jimok = $info->getProperty('01');//지목					
+				
 	$jiga = new GongsiJiga();	
 
-	$umd = '107';
-	$ri = '00';
-	$use = '13';
-	$state = '150';
 
-	$data['jiga'] = $jiga->getStateJiga($umd,$ri,$use,$state);
+	$rows = $jiga->getStateJiga($umd,$ri,$use,$state);
+
+	$data['jiga'] = array();
+	foreach($rows as $i=>$row){
+		$data['jiga'][$i] = $row;
+		$data['jiga'][$i]['JIMOK'] = iconv('euc-kr','utf-8',$jimok[$row['JIMOK']]);
+	}
 
 	$area = new Area();	
 	$addr = $area->getAddr($umd,$ri);

@@ -14,7 +14,7 @@ class Info {
 	function getProperty($p){
 		//$p=02:용도지역, 06=토지이용상황
 		
-		$query      = "SELECT LDP_CD,LDP_CD_NM FROM C_PROPERTY WHERE LDP_ITEM_CD='$p' group by LDP_CD_NM order by LDP_CD_NM ASC";
+		$query      = "SELECT LDP_CD,LDP_CD_NM FROM C_PROPERTY WHERE LDP_ITEM_CD='$p' order by LDP_CD_NM ASC";
 
     $result     = mysql_query($query,$this->conn) or die('::error:::'.mysql_error($conn));
 
@@ -29,6 +29,6 @@ class Info {
 	}
 	
 	function close(){
-		odbc_close($this->conn); 		
+		mysql_close($this->conn); 		
 	}
 }

@@ -1,7 +1,9 @@
 <script type="text/javascript">
-			try {document.execCommand('BackgroundImageCache', false, true);} catch(e) {}
+	if( $.browser.version == '6.0' ){
+		try {document.execCommand('BackgroundImageCache', false, true);} catch(e) {}
+	}
 		
-		</script>
+</script>
 
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=<?=$naver_api_key?>"></script>
 

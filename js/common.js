@@ -16,9 +16,13 @@ function openMap(){
 
 //ÄŞ¸¶Âï±â
 function numberFormat(num) {
-	var pattern = /(-?[0-9]+)([0-9]{3})/;
-	while(pattern.test(num)) {
-		num = num.replace(pattern,"$1,$2");
+	try{
+		var pattern = /(-?[0-9]+)([0-9]{3})/;
+		while(pattern.test(num)) {
+			num = num.replace(pattern,"$1,$2");
+		}
+	}catch(e){
+		alert(e.message);
 	}
 	return num;
 }

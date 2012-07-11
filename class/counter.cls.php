@@ -13,14 +13,14 @@ class Counter {
 	   $res = mysql_query($query,$this->conn);
 	   $data = mysql_fetch_assoc($res);
 	   
-	   if( $_COOKIE['access'] != '1' ){
+//	   if( $_COOKIE['access'] != '1' ){
 		   if( $data['total'] ){
 			   mysql_query("update access_counter set count=count+1 where date='".date('Y-m-d')."'",$this->conn);
 			 }else{
 				 mysql_query("insert into access_counter (date,count) values ('".date('Y-m-d')."',1)",$this->conn);		   
 			 }
-			 setcookie("access", "1", time()+86400, '/');
-	   }	   
+//			 setcookie("access", "1", time()+86400, '/');
+//	   }	   
 	}
 	
 	function calculate($addr){
