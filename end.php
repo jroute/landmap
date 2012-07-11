@@ -213,6 +213,17 @@ $(document).ready(function(){
 			},'json');
 		}//end .post umd2
 
+
+	$('#UMD2').change(function(){
+			$('#USE').val('');//reset;
+			$('#STATE').val('');//reset;
+	});
+	
+	$('#RI2').change(function(){
+			$('#USE').val('');//reset;
+			$('#STATE').val('');//reset;
+	});
+	
 	$('#USE').change(function(){
 			$('#STATE').val('');//reset;
 	});
@@ -283,10 +294,32 @@ function loadStateData(){
 						return;
 					}
 
+
+
+					gbn = '';
+					if( $('input[type=hidden][name=G]').val() == '2') gbn=' 산';
+					if( $('input[type=hidden][G]').val() == '3') gbn=' 가지번';
+					if( $('input[type=hidden][G]').val() == '4') gbn=' 블럭';										
+					bungi='';
+					if( $.trim($('input[type=hidden][name=S]').val()) ) bungi = ' '+$.trim($('input[type=hidden][name=S]').val());
+					if( $.trim($('input[type=hidden][name=E]').val()) ){
+						if( bungi ){
+							bungi = bungi+'-'+$.trim($('input[type=hidden][name=E]').val());						
+						}else{
+							bungi = ' '+$.trim($('input[type=hidden][name=E]').val());
+						}				
+					}
+					
+					addr = json.addr.UMD_NM+' '+json.addr.RI_NM + bungi;
+					//alert($('#open-address').val() + ' ' + addr)
+					if( $('#open-address').val() != addr ){
+						addr = json.addr.UMD_NM+' '+json.addr.RI_NM;
+					}		
+
 					for(i = 0 ; i < json.jiga.length ; i++ ){
 					var src = "<tr>"
 	src += "<td width='55' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "<td width='270'>&nbsp;&nbsp;<span class='addr'>"+json.addr.UMD_NM+' '+json.addr.RI_NM+ "</span></td>";
+	src += "<td width='270'>&nbsp;&nbsp;<span class='addr'>"+addr+ "</span></td>";
 	
 	src += "<td width='100' align='center'>"+$('#USE option:selected').text()+"</td>";
 	src += "<td width='100' align='center'>"+$('#STATE option:selected').text()+"</td>";
