@@ -13,9 +13,9 @@ class Area {
 	
 	function getUMD(){
 	  $query      = "SELECT UMD_CD,UMD_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' order by UMD_NM DESC";
-	  trace("À¾/¸é/µ¿ query : ".$query);
+	  trace("?/?/Óú query : ".$query);
     $result     = mysql_query($query,$this->conn) or die(mysql_error());
-    trace("À¾/¸é/µ¿ rows : ".mysql_num_rows($result));
+    trace("?/?/Óú rows : ".mysql_num_rows($result));
     $umd = array();
 		while( $row = mysql_fetch_assoc($result) ) {
 		if( trim($row['UMD_NM']) == '' ) continue;
@@ -30,9 +30,9 @@ class Area {
 	
 	function getRI($q){
 	  $query      = "SELECT RI_CD,RI_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' AND RI_CD!='00' AND UMD_CD='".$q."' order by RI_NM DESC";
-	  trace("¸® query : ".$query);
+	  trace("Ý¤ query : ".$query);
     $result     = mysql_query($query,$this->conn);
-    trace("¸® rows : ".mysql_num_rows($result));
+    trace("Ý¤ rows : ".mysql_num_rows($result));
     $ri = array();
     while( $row = mysql_fetch_array($result) ) {
 	    if( trim($row['RI_NM']) == '' ) continue;
@@ -46,9 +46,9 @@ class Area {
 	function getAddr($umd,$ri){
 		$ri = trim($ri)?trim($ri):'00';		
 		$query      = "SELECT SGG_NM,UMD_CD,UMD_NM,RI_CD,RI_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' AND UMD_CD='".$umd."' AND RI_CD='".$ri."'";
-    trace("ÁÖ¼Ò query : ".$query);
+    trace("×ùÊ« query : ".$query);
    $result     = mysql_query($query,$this->conn);
-    trace("ÁÖ¼Ò rows : ".mysql_num_rows($result));
+    trace("×ùÊ« rows : ".mysql_num_rows($result));
     $row = mysql_fetch_assoc($result);
     
 	  mysql_free_result($result);

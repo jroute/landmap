@@ -287,6 +287,21 @@ $(document).ready(function(){
 
 function loadStateData(){
 
+		if( $('#open-address').val() == '' ) return;
+		addr = $('#open-address').val();
+		addrString = addr;
+		$.post('/api/naver.map.php',{query:addr},function(data){
+			lng = data.point.x;
+			lat =	data.point.y;
+			oMap.clearOverlay();
+				var oPoint = new nhn.api.map.LatLng(lat, lng);
+				var oMarker = new nhn.api.map.Marker(oIcon, { title : '주소 : ' + addrString });
+				oMarker.setPoint(oPoint);
+				oMap.addOverlay(oMarker);
+				oMap.setCenter(oPoint);
+		},'json');
+		
+		
 			$.post('/json/jiga_state.php',{umd:$('#UMD2').val(),ri:$('#RI2').val(),use:$('#USE').val(),state:$('#STATE').val()},function(json)		{
 				$('#jiga-area > tbody > tr').remove();
 					if( json.jiga.length == 0 ){
@@ -296,30 +311,33 @@ function loadStateData(){
 
 
 
-					gbn = '';
-					if( $('input[type=hidden][name=G]').val() == '2') gbn=' 산';
-					if( $('input[type=hidden][G]').val() == '3') gbn=' 가지번';
-					if( $('input[type=hidden][G]').val() == '4') gbn=' 블럭';										
-					bungi='';
-					if( $.trim($('input[type=hidden][name=S]').val()) ) bungi = ' '+$.trim($('input[type=hidden][name=S]').val());
-					if( $.trim($('input[type=hidden][name=E]').val()) ){
-						if( bungi ){
-							bungi = bungi+'-'+$.trim($('input[type=hidden][name=E]').val());						
-						}else{
-							bungi = ' '+$.trim($('input[type=hidden][name=E]').val());
-						}				
-					}
 					
-					addr = json.addr.UMD_NM+' '+json.addr.RI_NM + bungi;
+					addr = json.addr.UMD_NM+' '+json.addr.RI_NM;
 					//alert($('#open-address').val() + ' ' + addr)
 					if( $('#open-address').val() != addr ){
 						addr = json.addr.UMD_NM+' '+json.addr.RI_NM;
 					}		
 
 					for(i = 0 ; i < json.jiga.length ; i++ ){
+					
+					gbn = '';
+					if( json.jiga[i].LAND_GBN == '2') gbn=' 산';
+					if( json.jiga[i].LAND_GBN == '3') gbn=' 가지번';
+					if( json.jiga[i].LAND_GBN == '4') gbn=' 블럭';										
+					bungi='';
+					if( json.jiga[i].BOBN ) bungi = ' '+parseInt(json.jiga[i].BOBN,10);
+					if( json.jiga[i].BUBN ){
+						if( bungi ){
+							bungi = bungi+'-'+parseInt(json.jiga[i].BUBN,10);						
+						}else{
+							bungi = ' '+parseInt(json.jiga[i].BUBN,10);
+						}				
+					}
+					
+										
 					var src = "<tr>"
 	src += "<td width='55' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "<td width='270'>&nbsp;&nbsp;<span class='addr'>"+addr+ "</span></td>";
+	src += "<td width='270'>&nbsp;&nbsp;<span class='addr'>"+addr+ bungi +"</span></td>";
 	
 	src += "<td width='100' align='center'>"+$('#USE option:selected').text()+"</td>";
 	src += "<td width='100' align='center'>"+$('#STATE option:selected').text()+"</td>";
@@ -337,6 +355,8 @@ function loadStateData(){
 }
 </script>
 <form method="post" id="form" action="finish.php" onsubmit="return false;">
+<input type="hidden" name="open_data" value="<?php echo $_POST['open_data'];?>" />
+
 <input type="hidden" name="sdate" value="<?php echo $_POST['sdate'];?>" />
 <input type="hidden" name="edate" value="<?php echo $_POST['edate'];?>" />
 
@@ -580,7 +600,7 @@ function loadStateData(){
 														<tr><td height='18'></td></tr>
 														<tr>
 															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
-																<?php echo $_POST['open_address'];?>&nbsp;&nbsp;&nbsp;
+																<?php echo $_POST['open_addr'];?>&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -604,7 +624,7 @@ function loadStateData(){
 														<tr><td height='18'></td></tr>
 														<tr>
 															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
-																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="0"/>&nbsp;&nbsp;&nbsp;
+																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="<?php echo @number_format($_POST['close_jiga']);?>"/>&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>

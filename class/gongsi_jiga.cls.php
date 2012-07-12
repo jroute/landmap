@@ -73,7 +73,7 @@ class GongsiJiga {
 			$state = $state ? sprintf('%03d',trim($state)):'000';
 
 			
-	  $query      = "SELECT LAND_CD,LAND_AREA,JIGA,JIMOK FROM LAND WHERE SIDOSGG_CD='44270' AND UMD_CD='$umd' AND RI_CD='$ri' AND USE_REGN1='$use' AND LAND_USE='$state'";// group by JIGA";
+	  $query      = "SELECT LAND_CD,LAND_AREA,JIGA,JIMOK,LAND_GBN,BOBN,BUBN FROM LAND WHERE SIDOSGG_CD='44270' AND UMD_CD='$umd' AND RI_CD='$ri' AND USE_REGN1='$use' AND LAND_USE='$state'";// group by JIGA";
     trace("State Jiga query : ".$query);  
 
 

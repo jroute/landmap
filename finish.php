@@ -145,7 +145,7 @@ $(document).ready(function(){
 });
 </script>
 <form method="post" id="form" action="end.php">
-
+<input type="hidden" name="open_data" value="<?php echo $_POST['open_data'];?>" />
 
 
 <input type="hidden" name="UMD" value="<?php echo $_POST['UMD'];?>" />
@@ -179,6 +179,7 @@ $(document).ready(function(){
 <input type="hidden" name="open_jiga" id="open-jiga" value="<?php echo $_POST['open_jiga'];?>" />
 <input type="hidden" name="open_cal_jiga" id="open-caljiga" value="<?php echo $_POST['open_cal_jiga'];?>"/>
 <input type="hidden" name="close_area" id="close-area" value="<?php echo $_POST['close_area'];?>" />
+<input type="hidden" name="close_jiga" id="close-jiga" value="<?php echo $_POST['close_jiga'];?>" />
 <input type="hidden" name="close_cal_jiga" id="close-caljiga" value="<?php echo $close_cal_jiga;?>"/>
 <!-- Save for Web Slices (001 개발부담금가산정_개시시점.JPG) -->
 <table id="__01" width="1281" height="1025" border="0" cellpadding="0" cellspacing="0">
@@ -536,7 +537,7 @@ while($data = mysql_fetch_assoc($res)):
 		<td colspan="2" rowspan="13">
 			<img src="img/103_DevPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<div id='menu02' style='position:absolute;top:735px;left:41px;width:162px;'>
+			<div id='menu02' style='position:absolute;top:818px;left:41px;width:162px;'>
 			<img src="img/103_DevPt_24.jpg" width="157" height="161" alt="">
 			</div>
 			</td>
