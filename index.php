@@ -127,10 +127,14 @@ $(document).ready(function(){
 		});
 		$('#open-area').val(area);
 		var jiga = 0;
-		$('.jiga').each(function(){
-			jiga += parseInt($(this).val(),10);
-		});		
-		$('#open-jiga').val(jiga);
+
+		if( (jidx = $('.seladdr').index($('.seladdr:checked'))) == -1 ){
+			alert('공시지가를 선택하십시오');
+			$('.seladdr:eq(0)').focus();
+			return;
+		}else{
+			$('#open-jiga').val($('.jiga:eq('+jidx +')').val());		
+		}
 
 		if( parseInt($('#open-jiga').val(),10)==0 ){
 			alert("공시지가 정보가 없습니다.");
@@ -307,7 +311,22 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 	src += " 																<tr><td height='1'  background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td background='img/start_point_106.jpg'></td><td background='img/start_point_106.jpg'></td></tr>"; 
 	//*/
 																	
-					$('#jiga-area > tbody').append($(src));				
+					$('#jiga-area > tbody').append($(src));		
+					
+					
+
+		addr = json.addr.UMD_NM+json.addr.RI_NM+$.trim(gbn)+$.trim(bungi);
+		addrString = json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi;
+		$.post('/api/naver.map.php',{query:addr},function(data){
+			lng = data.point.x;
+			lat =	data.point.y;
+			oMap.clearOverlay();
+				var oPoint = new nhn.api.map.LatLng(lat, lng);
+				var oMarker = new nhn.api.map.Marker(oIcon, { title : '주소 : ' + addrString });
+				oMarker.setPoint(oPoint);
+				oMap.addOverlay(oMarker);
+				oMap.setCenter(oPoint);
+		},'json');							
 			},'json');	
 			
 
