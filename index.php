@@ -87,6 +87,7 @@ $(document).ready(function(){
 		$('html').animate({scrollTop:300},1500);
 		var addr = '당진시'+$('.address:eq('+idx+')').text().replace(/\s/gi,'');
 		
+		$('#open-gongsijiga').val($('.jiga:eq('+idx+')').val());
 		$('#open-addr').val($('.addr:eq('+idx+')').text());
 		$('#open-address').val($('.address:eq('+idx+')').text());
 		$('#use').val($('.use:eq('+idx+')').attr('data'));
@@ -122,18 +123,20 @@ $(document).ready(function(){
 		}
 		
 		var area = 0;
-		$('.area').each(function(){
+		var jiga = 0;		
+		$('.area').each(function(index){
 			area += parseInt($(this).val(),10);			
+			jiga += parseInt($(this).val(),10) * parseInt($('.jiga:eq('+index+')').val(),10);
 		});
 		$('#open-area').val(area);
-		var jiga = 0;
+		$('#open-jiga').val(jiga);		
+
+		
 
 		if( (jidx = $('.seladdr').index($('.seladdr:checked'))) == -1 ){
-			alert('공시지가를 선택하십시오');
+			alert('대표 지번을 선택하십시오');
 			$('.seladdr:eq(0)').focus();
 			return;
-		}else{
-			$('#open-jiga').val($('.jiga:eq('+jidx +')').val());		
 		}
 
 		if( parseInt($('#open-jiga').val(),10)==0 ){
@@ -343,6 +346,8 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 <input type="hidden" name="open_address" id="open-address" value="<?php echo @$_POST['open_address'];?>" />
 <input type="hidden" name="open_area" id="open-area" value="<?php echo $open_area;?>" />
 <input type="hidden" name="open_jiga" id="open-jiga" value="<?php echo $open_jiga;?>" />
+
+<input type="hidden" name="open_gongsijiga" id="open-gongsijiga" value="<?php echo @$_POST['open_gongsijiga'];?>" />
 <!-- Save for Web Slices (001 개발부담금가산정_개시시점.JPG) -->
 <table id="__01" width="1281" height="1025" border="0" cellpadding="0" cellspacing="0">
 	<tr>

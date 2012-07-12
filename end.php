@@ -60,7 +60,8 @@ $lastDate[2] = date('t',mktime(0,0,0,2,1,$sy));
 $open_area = (int)$_POST['open_area'];
 $open_jiga = (int)$_POST['open_jiga'];
 
-$open_total = $open_area*$open_jiga;
+//$open_total = $open_area*$open_jiga;
+$open_total = $open_jiga;
 
 if( $_POST['close_jiga']){
 	$close_jiga = $_POST['close_jiga'];
@@ -378,6 +379,9 @@ function loadStateData(){
 <input type="hidden" name="open_address" id="open-address" value="<?php echo $_POST['open_address'];?>" />
 <input type="hidden" name="open_area" id="open-area" value="<?php echo $_POST['open_area'];?>" />
 <input type="hidden" name="open_jiga" id="open-jiga" value="<?php echo $_POST['open_jiga'];?>" />
+
+<input type="hidden" name="open_gongsijiga" id="open-gongsijiga" value="<?php echo $_POST['open_gongsijiga'];?>" />
+
 <input type="hidden" name="open_cal_jiga" value="<?php echo $open_cal_jiga;?>"/>
 <!-- Save for Web Slices (001 개발부담금가산정_개시시점.JPG) -->
 <table id="__01" width="1281" height="1025" border="0" cellpadding="0" cellspacing="0">

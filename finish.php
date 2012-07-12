@@ -141,6 +141,7 @@ $(document).ready(function(){
 			$('#devcost').focus();
 		}
 		
+		$('#devcost').focus();
 		
 });
 </script>
@@ -177,6 +178,9 @@ $(document).ready(function(){
 <input type="hidden" name="open_address" id="open-address" value="<?php echo $_POST['open_address'];?>" />
 <input type="hidden" name="open_area" id="open-area" value="<?php echo $_POST['open_area'];?>" />
 <input type="hidden" name="open_jiga" id="open-jiga" value="<?php echo $_POST['open_jiga'];?>" />
+
+<input type="hidden" name="open_gongsijiga" id="open-gongsijiga" value="<?php echo $_POST['open_gongsijiga'];?>" />
+
 <input type="hidden" name="open_cal_jiga" id="open-caljiga" value="<?php echo $_POST['open_cal_jiga'];?>"/>
 <input type="hidden" name="close_area" id="close-area" value="<?php echo $_POST['close_area'];?>" />
 <input type="hidden" name="close_jiga" id="close-jiga" value="<?php echo $_POST['close_jiga'];?>" />
@@ -342,7 +346,7 @@ while($data = mysql_fetch_assoc($res)):
 										<tr>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo $_POST['open_address'];?></td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_area']);?></td>
-											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_jiga']);?></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_gongsijiga']);?></td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $use[$OPEN['USE_REGN1']];?></td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $state[$OPEN['LAND_USE']];?></td>
 										</tr>
