@@ -70,8 +70,13 @@ $(document).ready(function(){
 	
 	$('.yjiga').live('click',function(){
 		var jiga = $(this).val();
+		var eq = ($('#jiga-area > tbody > tr').length-1);
+		
+		$('.jiga:eq('+eq+')').val(jiga);
 
-		$('.jiga:eq('+($('#jiga-area > tbody > tr').length-1)+')').text(jiga);
+		if( $('.seladdr:eq('+eq+')').is(':checked') == true ){		
+			$('#open-gongsijiga').val(jiga);
+		}
 	});
 
 	$('.del').live('click',function(){
@@ -84,7 +89,7 @@ $(document).ready(function(){
 
 	$('.seladdr').live('click',function(){
 		var idx = $('.seladdr').index($(this));
-		$('html').animate({scrollTop:300},1500);
+		$('html').animate({scrollTop:300},1000);
 		var addr = '´çÁø½Ã'+$('.address:eq('+idx+')').text().replace(/\s/gi,'');
 		
 		$('#open-gongsijiga').val($('.jiga:eq('+idx+')').val());
@@ -164,6 +169,10 @@ $(document).ready(function(){
 		
 	});	
 	
+	
+	$('.jiga').bind('focus',function(){
+		$('.seladdr:checked').prop('checked',false);
+	});
 
 });
 
@@ -179,6 +188,14 @@ function setData(){
 	});
 
 	$('#open-data').val(data);	
+	
+		idx = $('.seladdr').index($('.seladdr:checked'));
+//		alert(idx);
+		$('#open-gongsijiga').val($('.jiga:eq('+idx+')').val());
+		$('#open-addr').val($('.addr:eq('+idx+')').text());
+		$('#open-address').val($('.address:eq('+idx+')').text());
+		$('#use').val($('.use:eq('+idx+')').attr('data'));
+		$('#state').val($('.state:eq('+idx+')').attr('data'));	
 }
 
 function printData(){
@@ -202,15 +219,22 @@ function printData(){
 			
 		src += "<td width='65' align='right'><input type='text' class='area number' value='"+row[7]+"'/></td>";
 		src += "<td width='75' align='right'><input type='text' class='jiga number' value='"+row[8]+"'/></td>";
-		src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"'></td>";
+		var checked='';
+		if( row[1] == $('#open-address').val() ) checked='checked="true"';
+		src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
 		src += "<td width='55' align='center'><a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
 		src += "</tr>";
 	
 		$('#jiga-area > tbody').append($(src));	
 	}//end of for;
+	
+	$('.jiga').off();
+	$('.jiga').bind('focus',function(){
+		$('.seladdr:checked').prop('checked',false);
+	});
 
-/*
-$.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').val(),s:$('#S').val(),e:$('#E').val()},function(json)		{
+
+	$.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').val(),s:$('#S').val(),e:$('#E').val()},function(json)		{
 				$('#jiga-year > tbody > tr').remove();		
 				for(i = 0 ;  i < json.length; i++ ){
 					$('#jiga-year > tbody').append($('<tr><td height="30" width="40" align="center">'+json[i].YEAR+'</td>'+
@@ -221,7 +245,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 					));				
 				}
 			},'json');	
-*/						
+						
 			
 		if( $('#open-address').val() == '' ) return;
 		addr = $('#open-address').val();
@@ -296,6 +320,14 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 					$('#open-addr').val(json.addr.UMD_NM+' ' + json.addr.RI_NM);
 					$('#open-address').val(json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi);					
 					
+					var checked = "";
+//					alert($('.seladdr:checked').val() == )
+					if( typeof $('.seladdr:checked').val() == 'undefined' ){
+						checked = "checked='true'"
+						
+						$('#open-gongsijiga').val(json.jiga.JIGA);						
+					}				
+
 					var src = "<tr>"
 	src += "<td width='30' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
 	src += "<td width='150'>&nbsp;&nbsp;<span class='addr' style='display:none'>"+json.addr.UMD_NM+' '+json.addr.RI_NM + "</span>";
@@ -307,7 +339,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 			
 	src += "<td width='65' align='right'><input type='text' class='area number' value='"+json.jiga.LAND_AREA+"'/></td>";
 	src += "<td width='75' align='right'><input type='text' class='jiga number' value='"+json.jiga.JIGA+"'/></td>";
-	src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"'></td>";
+	src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"' "+checked+"></td>";
 	src += "<td width='55' align='center'><a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
 	src += "</tr>";
 	/*
@@ -316,7 +348,10 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 																	
 					$('#jiga-area > tbody').append($(src));		
 					
-					
+	$('.jiga').off();
+	$('.jiga').bind('focus',function(){
+		$('.seladdr:checked').prop('checked',false);
+	});					
 
 		addr = json.addr.UMD_NM+json.addr.RI_NM+$.trim(gbn)+$.trim(bungi);
 		addrString = json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi;
