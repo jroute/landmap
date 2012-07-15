@@ -2,6 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR" />
+<script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a[href=#top]').click(function(){
+		$(parent.document).scrollTop(0);
+	});
+	
+});
+</script>
 	</head>
 	<body style='margin:10px;' bgcolor='#ffffff'>
 		<table border='0' cellpadding='5' cellspacing='0'>

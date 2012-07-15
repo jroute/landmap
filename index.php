@@ -9,9 +9,9 @@ $area = new Area();
 $umd = $area->getUMD();
 
 $open_area = 0;
-if( @$_POST['open_area'] ) $open_area = $_POST['open_area'];
+if( @$_POST['open_area'] ) $open_area = @$_POST['open_area'];
 $open_jiga = 0;
-if( @$_POST['open_jiga'] ) $open_area = $_POST['open_jiga'];
+if( @$_POST['open_jiga'] ) $open_area = @$_POST['open_jiga'];
 
 ?>
 <style type="text/css">
@@ -25,6 +25,9 @@ if( @$_POST['open_jiga'] ) $open_area = $_POST['open_jiga'];
 <script type="text/javascript">
 $(document).ready(function(){
 
+
+		$(".number").numeric();
+		
 		//-- begin init
 		var val = $('#UMD').val();
 		if( val ){
@@ -70,19 +73,30 @@ $(document).ready(function(){
 	
 	$('.yjiga').live('click',function(){
 		var jiga = $(this).val();
-		var eq = ($('#jiga-area > tbody > tr').length-1);
 		
-		$('.jiga:eq('+eq+')').val(jiga);
-
-		if( $('.seladdr:eq('+eq+')').is(':checked') == true ){		
-			$('#open-gongsijiga').val(jiga);
+		//대표지선 선택시 선택한 지가의 지가정보를 수정
+		if( (jidx = $('.seladdr').index($('.seladdr:checked'))) != -1 ){
+			$('.jiga:eq('+jidx+')').val(jiga);		
+		}else{		
+			var eq = ($('#jiga-area > tbody > tr').length-1);
+			$('.jiga:eq('+eq+')').val(jiga);
 		}
+
+
 	});
 
 	$('.del').live('click',function(){
 		var idx = $('.del').index($(this));
 //		$('.del:eq('+idx+')').remove();
 		$('#jiga-area > tbody > tr:eq('+idx+')').remove();
+		
+		
+		//대표지번 선택이 제거 될경우 마지막 지번을 자동으로 선택
+		if( $('.seladdr').index($('.seladdr:checked')) == -1 ){
+			var eq = ($('#jiga-area > tbody > tr').length-1);
+			$('.seladdr:eq('+eq+')').prop('checked',true);
+		}
+		
 		return false;
 	});
 	
@@ -169,10 +183,6 @@ $(document).ready(function(){
 		
 	});	
 	
-	
-	$('.jiga').bind('focus',function(){
-		$('.seladdr:checked').prop('checked',false);
-	});
 
 });
 
@@ -217,8 +227,8 @@ function printData(){
 		src += "<td width='100' align='center'><span class='state' data='"+row[4]+"'>"+row[5]+"</span></td>";
 		src += "<td width='100' align='center'><span class='jimok'>"+row[6]+"</span></td>";
 			
-		src += "<td width='65' align='right'><input type='text' class='area number' value='"+row[7]+"'/></td>";
-		src += "<td width='75' align='right'><input type='text' class='jiga number' value='"+row[8]+"'/></td>";
+		src += "<td width='65' align='right'><input type='text' class='area number' maxLength='7' value='"+row[7]+"'/></td>";
+		src += "<td width='75' align='right'><input type='text' class='jiga number' maxLength='10' value='"+row[8]+"'/></td>";
 		var checked='';
 		if( row[1] == $('#open-address').val() ) checked='checked="true"';
 		src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
@@ -228,10 +238,6 @@ function printData(){
 		$('#jiga-area > tbody').append($(src));	
 	}//end of for;
 	
-	$('.jiga').off();
-	$('.jiga').bind('focus',function(){
-		$('.seladdr:checked').prop('checked',false);
-	});
 
 
 	$.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').val(),s:$('#S').val(),e:$('#E').val()},function(json)		{
@@ -246,7 +252,9 @@ function printData(){
 				}
 			},'json');	
 						
-			
+		$('.number').off();
+		$(".number").numeric();
+					
 		if( $('#open-address').val() == '' ) return;
 		addr = $('#open-address').val();
 		addrString = addr;
@@ -348,10 +356,8 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 																	
 					$('#jiga-area > tbody').append($(src));		
 					
-	$('.jiga').off();
-	$('.jiga').bind('focus',function(){
-		$('.seladdr:checked').prop('checked',false);
-	});					
+					$('.number').off();
+					$(".number").numeric();
 
 		addr = json.addr.UMD_NM+json.addr.RI_NM+$.trim(gbn)+$.trim(bungi);
 		addrString = json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi;
@@ -506,7 +512,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 											</td>
 											<td width='10'></td>
 											<td>
-<input type="text" name="S" id="S" size="5" value="<?php echo @$_POST['S'];?>"/>~<input type="text" name="E" id="E" size="5" value="<?php echo @$_POST['E'];?>"/>
+<input type="text" name="S" id="S" size="5" class="number" value="<?php echo @$_POST['S'];?>"/>~<input type="text" name="E" id="E" class="number" size="5" value="<?php echo @$_POST['E'];?>"/>
 											</td>
 											<td width='10'></td>
 											<td>

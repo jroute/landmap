@@ -17,6 +17,7 @@
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="/js/jquery-ui-1.8.21.custom.min.js" type="text/javascript"></script>
 
+<script src="/js/jquery.numeric.js" type="text/javascript"></script>
 <!--
 <script src="/js/jquery.numberformatter-1.2.3.jsmin.js" type="text/javascript"></script>
 <script src="/js/jshashset.js" type="text/javascript"></script>
@@ -27,4 +28,4 @@
 <script src="/js/common.js" type="text/javascript"></script>
 </head>
 <body style="margin:0px">
-
+<div id="top"></div>

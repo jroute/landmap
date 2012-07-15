@@ -3,6 +3,22 @@
 include "inc/header.php"; 
 $counter = new Counter();
 ?>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#a1').click(function(){
+		$(document).scrollTop(100);
+	});
+
+	$('#a2').click(function(){
+		$(document).scrollTop(1300);
+	});	
+	
+	$('#a3').click(function(){
+		$(document).scrollTop(1800);
+	});		
+});
+</script>
 <!-- Save for Web Slices (001 개발부담금가산정_개시시점.JPG) -->
 <table id="__01" width="1281" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -67,13 +83,13 @@ $counter = new Counter();
 							<tr><td align='center'>
 								<table border='0' cellspacing='10' cellpadding='0' width='1011' height='56'>
 									<tr><td bgcolor='#f6f6f6' style='font-family:dotum;font-size:14px;' align='center'>
-										<a href='./info.php#001' target='dev_info'><b>개발부담금이란?</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href='./info.php#003' target='dev_info'><b>납부의무자</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href='./info.php#004' target='dev_info'><b>부과대상</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href='./info.php#001' target='dev_info' id="a1"><b>개발부담금이란?</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href='./info.php#003' target='dev_info' id="a2"><b>납부의무자</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href='./info.php#004' target='dev_info' id="a3"><b>부과대상</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href='javascript:window.open("info2.php","_new","width=1024,height=768,left=500,top=300,scrollbars=yes,address=no");' target="_new"><b>사업종류</b></a>
 									</td></tr>
 								</table>
-								<iframe name='dev_info' src='info.php' width='1001' height='2565' frameborder='0' scrolling='no'></iframe>
+								<iframe name='dev_info' src='info.php' width='1001' height='2665' frameborder='0' scrolling='no'></iframe>
 							</td></tr>
 						</table>
 						<table border='0' cellspacing='0' cellpadding='20' background='img/refbg.jpg' width='1011' height='4'>
