@@ -173,7 +173,8 @@ $(document).ready(function(){
 	$('#btn-search').bind('click',function(){
 	
 	
-			if( $('#UMD').val() == '' ){ alert('읍/면/동 검색을 선택하십시오'); $('#UMD').focus(); return; }
+			if( $('#UMD').val() == '' ){ alert('읍/면/동 선택하십시오'); $('#UMD').focus(); return; }
+			if( $('#G').val() == '' ){ alert('필지구분을 선택하십시오'); $('#G').focus(); return; }			
 			if( $('#S').val() == '' ){ alert('지번을 입력하십시오'); $('#S').focus(); return; }									
 
 			loadData();
@@ -219,20 +220,20 @@ function printData(){
 		if( rows[i] == '' ) continue;
 		row = rows[i].split(':');
 	var src = "<tr>"
-		src += "<td width='30' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-		src += "<td width='150'>&nbsp;&nbsp;<span class='addr' style='display:none'>"+row[0] + "</span>";
+		src += "<td width='44' height='30' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;"+($('#jiga-area > tbody > tr').length+1)+"</td>";
+		src += "<td width='188' align='left'>&nbsp;&nbsp;&nbsp;<span class='addr' style='display:none'>"+row[0] + "</span>";
 		src += "<span class='address'>"+row[1]+"</span></td>";
 	
-		src += "<td width='100' align='center'><span class='use' data='"+row[2]+"'>"+row[3]+"</span></td>";
-		src += "<td width='100' align='center'><span class='state' data='"+row[4]+"'>"+row[5]+"</span></td>";
-		src += "<td width='100' align='center'><span class='jimok'>"+row[6]+"</span></td>";
+		src += "<td width='118' align='left'>&nbsp;&nbsp;<span class='use' data='"+row[2]+"'>"+row[3]+"</span></td>";
+		src += "<td width='151' align='left'>&nbsp;&nbsp;<span class='state' data='"+row[4]+"'>"+row[5]+"</span></td>";
+		src += "<td width='101' align='left'>&nbsp;&nbsp;<span class='jimok'>"+row[6]+"</span></td>";
 			
-		src += "<td width='65' align='right'><input type='text' class='area number' maxLength='7' value='"+row[7]+"'/></td>";
-		src += "<td width='75' align='right'><input type='text' class='jiga number' maxLength='10' value='"+row[8]+"'/></td>";
+		src += "<td width='94' align='right'><input type='text' class='area number' maxLength='7' value='"+row[7]+"'/></td>";
+		src += "<td width='126' align='right'><input type='text' class='jiga number' maxLength='10' value='"+row[8]+"'/></td>";
 		var checked='';
 		if( row[1] == $('#open-address').val() ) checked='checked="true"';
-		src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
-		src += "<td width='55' align='center'><a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
+		src += "<td width='65' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
+		src += "<td width='50' align='left'>&nbsp;&nbsp;<a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
 		src += "</tr>";
 	
 		$('#jiga-area > tbody').append($(src));	
@@ -337,18 +338,18 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 					}				
 
 					var src = "<tr>"
-	src += "<td width='30' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "<td width='150'>&nbsp;&nbsp;<span class='addr' style='display:none'>"+json.addr.UMD_NM+' '+json.addr.RI_NM + "</span>";
+	src += "<td width='44' height='30' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;"+($('#jiga-area > tbody > tr').length+1)+"</td>";
+	src += "<td width='188' align='left'>&nbsp;&nbsp;&nbsp;<span class='addr' style='display:none'>"+json.addr.UMD_NM+' '+json.addr.RI_NM + "</span>";
 	src += "<span class='address'>"+json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi+"</span></td>";
 	
-		src += "<td width='100' align='center'><span class='use' data='"+json.jiga.USE_REGN1+"'>"+json.jiga.USE+"</span></td>";
-		src += "<td width='100' align='center'><span class='state' data='"+json.jiga.LAND_USE+"'>"+json.jiga.STATE+"</span></td>";
-		src += "<td width='100' align='center'><span class='jimok'>"+json.jiga.JIMOK+"</span></td>";
+		src += "<td width='120' align='left'>&nbsp;&nbsp;<span class='use' data='"+json.jiga.USE_REGN1+"'>"+json.jiga.USE+"</span></td>";
+		src += "<td width='151' align='left'>&nbsp;&nbsp;<span class='state' data='"+json.jiga.LAND_USE+"'>"+json.jiga.STATE+"</span></td>";
+		src += "<td width='101' align='left'>&nbsp;&nbsp;<span class='jimok'>"+json.jiga.JIMOK+"</span></td>";
 			
-	src += "<td width='65' align='right'><input type='text' class='area number' value='"+json.jiga.LAND_AREA+"'/></td>";
-	src += "<td width='75' align='right'><input type='text' class='jiga number' value='"+json.jiga.JIGA+"'/></td>";
-	src += "<td width='40' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"' "+checked+"></td>";
-	src += "<td width='55' align='center'><a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
+	src += "<td width='94' align='right'><input type='text' class='area number' value='"+json.jiga.LAND_AREA+"'/></td>";
+	src += "<td width='126' align='right'><input type='text' class='jiga number' value='"+json.jiga.JIGA+"'/></td>";
+	src += "<td width='65' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"' "+checked+"></td>";
+	src += "<td width='60' align='left'>&nbsp;&nbsp;<a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
 	src += "</tr>";
 	/*
 	src += " 																<tr><td height='1'  background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td height='1' background='img/start_point_106.jpg'></td><td background='img/start_point_106.jpg'></td><td background='img/start_point_106.jpg'></td></tr>"; 
@@ -489,7 +490,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 											<td width='10'></td>
 											<td>
 <select id="UMD" name="UMD">
-<option value="">읍/면/동 검색</option>
+<option value="">읍/면/동 선택</option>
 <?php foreach($umd as $cd=>$nm):?>
 <option value="<?=$cd?>" <?php if( @$_POST['UMD'] == $cd):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
@@ -498,13 +499,14 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 											<td width='10'></td>
 											<td>
 <select id="RI" name="RI">
-<option value="">리 검색</option>
+<option value="">리 선택</option>
 </select>
 											</td>
 											<td width='10'></td>
 											<td>
 <select id="G" name="G">
-<option value="1" <?php if( @$_POST['G'] == '1'):?>selected="selected"<?php endif;?>>지명/지번 검색</option>
+<option value="">필지구분 선택</option>
+<option value="1" <?php if( @$_POST['G'] == '1'):?>selected="selected"<?php endif;?>>일반지번</option>
 <option value="2" <?php if( @$_POST['G'] == '2'):?>selected="selected"<?php endif;?>>산</option>
 <option value="3" <?php if( @$_POST['G'] == '3'):?>selected="selected"<?php endif;?>>가지번</option>
 <option value="5" <?php if( @$_POST['G'] == '5'):?>selected="selected"<?php endif;?>>블럭</option>
@@ -512,7 +514,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 											</td>
 											<td width='10'></td>
 											<td>
-<input type="text" name="S" id="S" size="5" class="number" value="<?php echo @$_POST['S'];?>"/>~<input type="text" name="E" id="E" class="number" size="5" value="<?php echo @$_POST['E'];?>"/>
+<input type="text" name="S" id="S" size="5" maxlength="4" class="number2" value="<?php echo @$_POST['S'];?>"/>~<input type="text" name="E" id="E" class="number2" size="5" value="<?php echo @$_POST['E'];?>" maxlength="4" />
 											</td>
 											<td width='10'></td>
 											<td>
@@ -537,7 +539,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 						<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 						<table border='0' cellpadding='0' cellspacing='0' width='1010' height='626'>
 							<tr>
-							<!-- 공시지가검색 -->
+							<!-- 공시지가검색 
 								<td valign='top' width='228' background='img/gongsi_bg.jpg'>
 									<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 									<table border='0' cellpadding='0' cellspacing='0' width='228' >
@@ -560,13 +562,14 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 										<tr>
 									</table>
 								</td>
-							<!-- 공시지가검색 -->
+							 공시지가검색 
 								<td width='10'>&nbsp;</td>
+								-->
 								<td valign='top' width='769'>
-									<table border='0' cellpadding='0' cellspacing='0' height='234' width='769'  background='img/gongsi_lst_bg.jpg'>
+									<table border='0' cellpadding='0' cellspacing='0' height='234' width='1009'  background='img/gongsi_lst_bg.jpg'>
 										<tr>
 											<!-- 지역별 공시지가 -->
-											<td valign='top' width='769' align='center'>
+											<td valign='top' width='1009' align='center'>
 												<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 												<table border='0' cellpadding='0' cellspacing='0' >
 													<tr>
@@ -578,7 +581,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 													</tr>
 													<tr>
 														<td align='center'>
-<div style="padding-left:17px;width:738px;height:130px;overflow-y:auto">
+<div style="padding-left:17px;width:964px;height:130px;overflow-y:auto">
 															<table border='0' cellpadding='0' cellspacing='0' style='font-family:dotum;font-size:9pt;' id="jiga-area">
 															<tbody>
 
@@ -595,10 +598,10 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 										</tr>
 									</table>
 									<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
-									<table border='0' cellpadding='0' cellspacing='0' height='380' width='769'  background='img/map_bg.jpg'>
+									<table border='0' cellpadding='0' cellspacing='0' height='380' width='1009'  background='img/map_bg.jpg'>
 										<tr>
 										<!-- 지도보기 영역 -->
-											<td valign='top' width='769' align='center'>
+											<td valign='top' width='1009' align='center'>
 												<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 												<table border='0' cellpadding='0' cellspacing='0' >
 													<tr>
@@ -609,9 +612,9 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 															<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
 															<table border='0' cellpadding='0' cellspacing='0'>
 																<tr>
-																	<td>
+																	<td width='776'>
 																		
-<?php include("inc/map.php");?>																		
+																	
 																		
 																	</td>
 																	<td width='12'></td>
@@ -620,7 +623,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 																	<td>
 																		<table border='0' cellpadding='0' cellspacing='0' height='100%'>
 																			<tr>
-																				<td align='center'><a href="#zoom" id="zoom"><img src='img/end_point_127.jpg' border='0'></a><br><br></td>
+																				<td align='center'><a href="#zoomin" id="zoomin"><img src='img/plus.jpg' border='0'></a><a href="#zoomout" id="zoomout"><img src='img/minus.jpg' border='0'></a><br><br></td>
 																			</tr>
 																			<tr>
 																				<td><img src='img/end_point_141.jpg' border='0'><br></td>
@@ -925,5 +928,5 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 </table>
 <!-- End Save for Web Slices -->
 </form>						
-
+<?php include("inc/map.php");?>	
 <?php include "inc/footer.php"; ?>

@@ -268,9 +268,11 @@ $(document).ready(function(){
 														<td>
 															<table border='0' cellpadding='0' cellspacing='0' >
 																<tr>
-																	<td><input type='text' name='devcost' id="devcost" class="number" style='text-align:right;width:288px;' value="<?php echo number_format($calcost[1]);?>"></td>
+																	<td><input type='text' name='devcost' id="devcost" class="number" style='text-align:right;width:174px;' value="<?php echo number_format($calcost[1]);?>"></td>
 																	<td width='10'></td>
 																	<td><a href="#caljiga" id="caljiga"><img src='img/dev_point_34.jpg' border='0'></a><br></td>
+																	<td width='10'></td>
+																	<td><a href="#caljiga" id="caljiga"><img src='img/dev_qa.jpg' border='0'></a><br></td>
 																</tr>
 															</table>
 														</td>
@@ -325,75 +327,68 @@ while($data = mysql_fetch_assoc($res)):
 							</tr>
 							<!-- 주소검색 -->
 						</table>
-						<table border='0' cellpadding='0' cellspacing='4' width='1010' height='45' style='font-family:dotum;font-size:10px;' bgcolor='#d6e6f6'>
+						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
+						<table border='0' cellpadding='0' cellspacing='1' width='1010' height='45' style='font-family:dotum;font-size:10px;' bgcolor='#d6e6f6'>
 							<tr>
-								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='50'>개발기간</td>
-								<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'>
-								<?php echo $_POST['sdate'];?> ~ <?php echo $_POST['edate'];?> 
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25' width='150'>개발기간</td>
+								<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' align='left'>&nbsp;&nbsp;<?php echo $_POST['sdate'];?> ~ <?php echo $_POST['edate'];?> 
 								</td>
+							</tr>
+							<tr>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25' width='150'>대표지번</td>
+								<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25' align='left'>&nbsp;&nbsp;<?php echo $_POST['open_address'];?></td>
+							</tr>
+						</table>
+						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
+						<table border='0' cellpadding='0' cellspacing='1' width='1010' height='45' style='font-family:dotum;font-size:10px;' bgcolor='#d6e6f6'>
+							<tr>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' width='150'>구분</td>
+								
+									
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25'>총면적</td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>공시지가</td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>용도지역</td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>토지이용상황</td>
+										
 							</tr>
 							<tr>
 								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>개시시점</td>
-								<td style='padding:0 0 0 0;'>
-									<table border='0' cellpadding='0' cellspacing='0' width='100%'>
-										<tr bgcolor='#e3effb'>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25'>대표지번</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>총면적</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>공시지가</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>용도지역</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>토지이용상황</td>
-										</tr>
-										<tr>
-											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo $_POST['open_address'];?></td>
-											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_area']);?></td>
-											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_gongsijiga']);?></td>
+								
+											
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo number_format($_POST['open_area']);?> m<sup>2</sup></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['open_gongsijiga']);?> 원</td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $use[$OPEN['USE_REGN1']];?></td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $state[$OPEN['LAND_USE']];?></td>
-										</tr>
-									</table>
-								</td>
+										
 							</tr>
 							<tr>
 								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='30'>종료시점</td>
-								<td style='padding:0 0 0 0;'>
-									<table border='0' cellpadding='0' cellspacing='0' width='100%'>
-										<tr bgcolor='#e3effb'>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' height='25'>총면적</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>공시지가</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>용도지역</td>
-											<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>토지이용상황</td>
-										</tr>
-										<tr>
-											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo number_format($_POST['close_area']);?></td>
-											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['close_jiga']);?></td>
+								
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff' height='25'><?php echo number_format($_POST['close_area']);?> m<sup>2</sup></td>
+											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo number_format($_POST['close_jiga']);?> 원</td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'><?php echo $use[$USE];?></td>
 											<td style='font-family:dotum;font-size:14px;font-weight:bold;' bgcolor='#ffffff'	><?php echo $state[$STATE];?></td>
-										</tr>
-									</table>
-								</td>
+										
 							</tr>
 						</table>
-						<table border='0' cellpadding='0' cellspacing='0' width='1010' bgcolor='#d6e6f6' height='45'>
+						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
+						<table border='0' cellpadding='0' cellspacing='1' width='1010' height='25' style='font-family:dotum;font-size:10px;' bgcolor='#d6e6f6'>
 							<tr>
-								<td width='20'></td>
-								<td><img src='img/dev_point_79.jpg' border='0'><br></td>
-								<td width='10'></td>
-								<td align='right' style='font-size:16px;font-weight:bold;' ><?php echo number_format($_POST['open_cal_jiga']);?></td>
-								<td width='10'></td>
-								<td><img src='img/dev_point_82.jpg' border='0'><br></td>
-								<td width='10'></td>	
-								<td align='right' style='font-size:16px;font-weight:bold;' ><?php echo number_format($close_cal_jiga);?></td>
-								<td width='10'></td>
-								<td><img src='img/dev_point_84.jpg' border='0'><br></td>
-								<td width='10'></td>
-								<td align='right' style='font-size:16px;font-weight:bold;' ><span id="print-devcost" style='font-size:16px;font-weight:bold;color:#0078ff;' ><?php echo number_format($calcost[1]);?></span></td>
-								<td width='10'></td>
-								<td><img src='img/dev_point_84_1.jpg' border='0'><br></td>
-								<td width='10'></td>
-								<td align='right' style='font-size:16px;font-weight:bold;' ><span id="print-increases" style='font-size:16px;font-weight:bold;color:#0078ff;' >0</span></td>
-								<td width='20'></td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' width='150'>개시시점 금액</td>
+								
+									
+								<td align='right' style='font-size:16px;font-weight:bold;' bgcolor='#ffffff' ><?php echo number_format($_POST['open_cal_jiga']);?>&nbsp;&nbsp;</td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>종료시점 금액</td>
+								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><?php echo number_format($close_cal_jiga);?>&nbsp;&nbsp;</td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>개발비용 금액</td>
+								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><span id="print-devcost" style='font-size:16px;font-weight:bold;color:#0078ff;' ><?php echo number_format($calcost[1]);?></span>&nbsp;&nbsp;</td>
+								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>정상지가 상승분</td>
+								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><span id="print-increases" style='font-size:16px;font-weight:bold;color:#0078ff;' >0</span>&nbsp;&nbsp;</td>
+										
 							</tr>
+							
 						</table>
+						
 						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
 						<table border='0' cellpadding='5' cellspacing='0'>
 							<tr>
@@ -424,8 +419,8 @@ while($data = mysql_fetch_assoc($res)):
 															<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 															<table border='0' cellpadding='0' cellspacing='0'>
 																<tr>
-																	<td>
-<?php include "inc/map_finish.php";?>																		
+																	<td width='750'>
+																	
 																		
 																	</td>
 																	<td width='12'></td>
@@ -434,7 +429,7 @@ while($data = mysql_fetch_assoc($res)):
 																	<td>
 																		<table border='0' cellpadding='0' cellspacing='0' height='100%'>
 																			<tr>
-																				<td align='center'><a href="#zoom" id="zoom"><img src='img/end_point_127.jpg' border='0'></a><br><br></td>
+																				<td align='center'><a href="#zoom" id="zoom"><img src='img/plus.jpg' border='0'></a><a href="#zoom" id="zoom"><img src='img/minus.jpg' border='0'></a><br><br></td>
 																			</tr>
 																			<tr>
 																				<td><img src='img/end_point_141.jpg' border='0'><br></td>
@@ -541,7 +536,7 @@ while($data = mysql_fetch_assoc($res)):
 		<td colspan="2" rowspan="13">
 			<img src="img/103_DevPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<div id='menu02' style='position:absolute;top:818px;left:41px;width:162px;'>
+			<div id='menu02' style='position:absolute;top:812px;left:41px;width:162px;'>
 			<img src="img/103_DevPt_24.jpg" width="157" height="161" alt="">
 			</div>
 			</td>
@@ -746,4 +741,5 @@ while($data = mysql_fetch_assoc($res)):
 </table>
 <!-- End Save for Web Slices -->
 </form>
+<?php include "inc/map_finish.php";?>	
 <?php include "inc/footer.php"; ?>

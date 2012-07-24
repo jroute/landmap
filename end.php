@@ -200,6 +200,7 @@ $(document).ready(function(){
 				var i = 1;
 				$('#RI2 > option').remove();
 				$('#RI2').append($('<option value="">리 검색</option>'));
+				
 				if( json != false ){
 					for(cd in json){
 						if( '<?php echo $RI2;?>' == cd ){
@@ -255,7 +256,8 @@ $(document).ready(function(){
 	$('#btn-search').bind('click',function(){
 	
 	
-			if( $('#UMD').val() == '' ){ alert('읍/면/동 검색을 선택하십시오'); $('#UMD').focus(); return; }
+			if( $('#UMD').val() == '' ){ alert('읍/면/동 선택하십시오'); $('#UMD').focus(); return; }
+			if( $('#G').val() == '' ){ alert('필지구분을 선택하십시오'); $('#G').focus(); return; }			
 			if( $('#S').val() == '' ){ alert('지번을 입력하십시오'); $('#S').focus(); return; }									
 
 			
@@ -343,17 +345,17 @@ function loadStateData(){
 					
 										
 					var src = "<tr>"
-	src += "<td width='55' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "<td width='270'>&nbsp;&nbsp;<span class='addr'>"+addr+ bungi +"</span></td>";
+	src += "<td width='47' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
+	src += "<td width='290' align='left'>&nbsp;&nbsp;&nbsp;<span class='addr'>"+addr+ bungi +"</span></td>";
 	
-	src += "<td width='100' align='center'>"+$('#USE option:selected').text()+"</td>";
-	src += "<td width='100' align='center'>"+$('#STATE option:selected').text()+"</td>";
+	src += "<td width='128' align='left'>&nbsp;&nbsp;&nbsp;"+$('#USE option:selected').text()+"</td>";
+	src += "<td width='80' align='left'>&nbsp;&nbsp;&nbsp;"+$('#STATE option:selected').text()+"</td>";
 
-	src += "<td width='70' align='center'>" + json.jiga[i].JIMOK+"</td>";	
+	src += "<td width='128' align='left'>&nbsp;&nbsp;&nbsp;" + json.jiga[i].JIMOK+"</td>";	
 	src += "<td width='100' align='right'><span class='area'>"+numberFormat(json.jiga[i].LAND_AREA)+"</span></td>";	
 	
-	src += "<td width='125' align='right'><span class='jiga'>"+numberFormat(json.jiga[i].JIGA)+"</span></td>";
-	src += "<td width='70' align='center'><input type='radio' name='addr' class='seladdr'></td>";
+	src += "<td width='70' align='right'><span class='jiga'>"+numberFormat(json.jiga[i].JIGA)+"</span></td>";
+	src += "<td width='42' align='center'><input type='radio' name='addr' class='seladdr'></td>";
 	src += "																</tr>";
 																	
 					$('#jiga-area > tbody').append($(src));				
@@ -456,7 +458,7 @@ function loadStateData(){
 											<td width='10'></td>
 											<td>
 <select id="UMD" name="UMD3">
-<option value="">읍/면/동 검색</option>
+<option value="">읍/면/동 선택</option>
 <?php foreach($umd as $cd=>$nm):?>
 <option value="<?=$cd?>" <?php if( $UMD3 == $cd ):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
@@ -465,13 +467,14 @@ function loadStateData(){
 											<td width='10'></td>
 											<td>
 <select id="RI" name="RI3" style="width:90px">
-<option value="">리 검색</option>
+<option value="">리 선택</option>
 </select>
 											</td>
 											<td width='10'></td>
 											<td>
 <select id="G" name="G3">
-<option value="1" <?php if( @$G3 == '1'):?>selected="selected"<?php endif;?>>지명/지번 검색</option>
+<option value="">필지구분 선택</option>
+<option value="1" <?php if( @$G3 == '1'):?>selected="selected"<?php endif;?>>일반지번</option>
 <option value="2" <?php if( @$G3 == '2'):?>selected="selected"<?php endif;?>>산</option>
 <option value="3" <?php if( @$G3 == '3'):?>selected="selected"<?php endif;?>>가지번</option>
 <option value="5" <?php if( @$G3 == '4'):?>selected="selected"<?php endif;?>>블럭</option>
@@ -479,7 +482,7 @@ function loadStateData(){
 											</td>
 											<td width='10'></td>
 											<td>
-<input type="text" name="S3" id="S" size="5" value="<?php echo $S3;?>"/>~<input type="text" name="E3" id="E" size="5" value="<?php echo $E3;?>"/>
+<input type="text" name="S3" id="S" size="5" class="number2" value="<?php echo $S3;?>" maxlength="4" />~<input type="text" name="E3" id="E" size="5" value="<?php echo $E3;?>" maxlength="4" class="number2" />
 											</td>
 											<td width='10'></td>
 											<td>
@@ -576,7 +579,7 @@ function loadStateData(){
 													<tr>
 														<td align='center'>
 <div style="padding-left:15px;width:983px;height:130px;overflow-y:auto">		
-															<table border='0' cellpadding='0' cellspacing='0' style='font-family:dotum;font-size:9pt;' id="jiga-area" width="100%">
+															<table border='0' cellpadding='0' cellspacing='0' style='font-family:dotum;font-size:9pt;' id="jiga-area" width="98%">
 																<tbody>
 
 																</tbody>																
@@ -650,20 +653,20 @@ function loadStateData(){
 											</td>
 											<td width='12'></td>
 										<!-- 지도보기 영역 -->
-											<td valign='top' width='769' align='center'  background='img/map_bg.jpg'>
+											<td valign='top' width='769' align='center'  background='img/map_bg3.jpg'>
 												<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 												<table border='0' cellpadding='0' cellspacing='0' >
 													<tr>
-														<td align='center'><img src='img/start_point_124.jpg' border='0'><br></td>
+														<td align='center'><img src='img/map_bg2.jpg' border='0'><br></td>
 													</tr>
 													<tr>
 														<td align='center'>
 															<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
 															<table border='0' cellpadding='0' cellspacing='0'>
 																<tr>
-																	<td>
+																	<td width='500'>
 																		
-<?php include "inc/map.php";?>																		
+																	
 																		
 																	</td>
 																	<td width='12'></td>
@@ -672,7 +675,7 @@ function loadStateData(){
 																	<td>
 																		<table border='0' cellpadding='0' cellspacing='0' height='100%'>
 																			<tr>
-																				<td align='center'><a href="#zoom" id="zoom"><img src='img/end_point_127.jpg' border='0'></a><br><br></td>
+																				<td align='center'><a href="#zoomin" id="zoomin"><img src='img/plus.jpg' border='0'></a><a href="#zoomout" id="zoomout"><img src='img/minus.jpg' border='0'></a><br><br></td>
 																			</tr>
 																			<tr>
 																				<td><img src='img/end_point_141.jpg' border='0'><br></td>
@@ -770,7 +773,7 @@ function loadStateData(){
 		<td colspan="2" rowspan="13">
 			<img src="img/102_EndPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<div id='menu02' style='position:absolute;top:737px;left:41px;width:162px;'>
+			<div id='menu02' style='position:absolute;top:738px;left:41px;width:162px;'>
 			<img src="img/102_EndPt_24.jpg" width="157" height="161" alt=""><br>
 			<table border='0' cellpadding='0' cellspacing='0' height='5'><tr><td></td></tr></table>	
 			</td>
@@ -980,4 +983,5 @@ function loadStateData(){
 </table>
 <!-- End Save for Web Slices -->
 </form>
+<?php include "inc/map2.php";?>	
 <?php include "inc/footer.php"; ?>

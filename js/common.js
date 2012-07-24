@@ -1,9 +1,16 @@
 
 
 	zoom  = 10
-function setZoom(){
+function setZoomIn(){
 	zoom++;
 	if( zoom > 14 ) zoom = 14;
+	oMap.setLevel(zoom);
+
+}
+
+function setZoomOut(){
+	zoom--;
+	if( zoom < 5 ) zoom = 5;
 	oMap.setLevel(zoom);
 }
 
@@ -39,10 +46,15 @@ $(document).ready(function(){
 		
 		
 		
-	$('#zoom').click(function(){
-		setZoom();
+	$('#zoomin').click(function(){
+		setZoomIn();
 		return false;		
 	});
+	
+	$('#zoomout').click(function(){
+		setZoomOut();
+		return false;		
+	});	
 	
 	$('#open-map').click(function(){
 		openMap();
@@ -81,10 +93,24 @@ $(document).ready(function(){
 			}
 		},'json');
 	});	
-	
-	$('.number').keyup(function(){
-		$(this).val(numberFormat(unNumberFormat($(this).val())));
+
+	$('.number').keypress(function(e){	
+		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+		if( key == 13 ) return;
+//alert(key)
+		if( (key >= 48 && key <= 58) || key == 8 || key == 37 || key == 39){
+			return true;
+		}else{
+
+      return false;
+		}	
+	})
+	$('.number').keyup(function(e){
+			$(this).val(numberFormat(unNumberFormat($(this).val())));
+
 	});
 	
+
+	$('.number2').numeric();
 	
 });

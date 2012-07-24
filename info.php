@@ -15,7 +15,7 @@ $(document).ready(function(){
 	<body style='margin:10px;' bgcolor='#ffffff'>
 		<table border='0' cellpadding='5' cellspacing='0'>
 			<tr>
-				<td><a name='top'><img src='img/ref_word_28.jpg' border='0'><br></a></td>
+				<td><img src='img/ref_word_28.jpg' border='0'><br></td>
 				<td style='font-family:dotum;font-size:12pt;color:0971b0;font-weight:bold;'><a name='001'>개발부담금이란?</a></td>
 			</tr>
 			<tr>
@@ -24,18 +24,18 @@ $(document).ready(function(){
 					개발부담금은 국가나 지방자치단체로부터 토지이용계획 변경이나 개발 인/허가 등을 받아 시행한 개발사업에서 발생한 지가상승 차익의 일부를 사회로 환수하기 위하여 부과됩니다.
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;'>개발부담금</td>
+							<td style='border-style:solid;border-color:#eeeeee;' align='center'>개발부담금</td>
 							<td style='border-style:solid;border-color:#eeeeee;'>개발이익 × 25%</td>
 						</tr>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;'>개발이익</td>
+							<td style='border-style:solid;border-color:#eeeeee;' align='center'>개발이익</td>
 							<td style='border-style:solid;border-color:#eeeeee;'>종료시점지가 - (개시시점지가 + 정상상승분 + 개발비용)</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 		</table>
-		<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
+		<center><br><a href=#top><img src='img/up2.jpg' border='0'><br></a></center>
 		<img src='img/sep55.jpg' border='0' width='950'><br><br>
 		<table border='0' cellpadding='5' cellspacing='0' width='100%'>
 			<tr>
@@ -62,8 +62,8 @@ $(document).ready(function(){
 					개발부담금은 개발사업의 시행자가 납부의무를 집니다. 다만, 각 호의 어느 하나에 해당하는 경우에는 그에 해당하는 자가 개발부담금을 납부하셔야 합니다.(법 제 6 조)
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>구분</td>
-							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>납부의무자</td>
+							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>구분</td>
+							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>납부의무자</td>
 						</tr>
 						<tr>
 							<td style='border-style:solid;border-color:#eeeeee;'>개발사업을 시행하는 경우</td>
@@ -104,23 +104,23 @@ $(document).ready(function(){
 					1. 인/허가 시기에 따른 부과대상
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>사업지역</td>
-							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>개발사업의 인가일</td>
-							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>부과대상여부</td>
+							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>사업지역</td>
+							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>개발사업의 인가일</td>
+							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>부과대상여부</td>
 						</tr>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;'>비수도권</td>
-							<td style='border-style:solid;border-color:#eeeeee;'>2006.01.01 이후 인가</td>
-							<td style='border-style:solid;border-color:#eeeeee;'>부과대상</td>
+							<td style='border-style:solid;border-color:#eeeeee;' align='center'>비수도권</td>
+							<td style='border-style:solid;border-color:#eeeeee;' align='center'>2006.01.01 이후 인가</td>
+							<td style='border-style:solid;border-color:#eeeeee;' align='center'>부과대상</td>
 						</tr>
 					</table><br>
 					2. 사업면적에 따른 부과대상
 					<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>구분</td>
-							<td colspan='3' style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa'>부과대상규모</td>
+							<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>구분</td>
+							<td colspan='3' style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>부과대상규모</td>
 						</tr>
-						<tr><td rowspan='4' style='border-style:solid;border-color:#eeeeee;'>도시지역</td></tr>
+						<tr><td rowspan='4' style='border-style:solid;border-color:#eeeeee;' align='center'>도시지역</td></tr>
 						<tr>
 							<td style='border-style:solid;border-color:#eeeeee;'>1) 특별시 / 광역시</td>
 							<td style='border-style:solid;border-color:#eeeeee;'>660m<sup>2</sup> 이상</td>
@@ -134,7 +134,7 @@ $(document).ready(function(){
 							<td style='border-style:solid;border-color:#eeeeee;'>1,650m<sup>2</sup> 이상</td>
 						</tr>
 						<tr>
-							<td style='border-style:solid;border-color:#eeeeee;'>4) 비도시지역</td>
+							<td style='border-style:solid;border-color:#eeeeee;' align='center'>4) 비도시지역</td>
 							<td colspan='3' style='border-style:solid;border-color:#eeeeee;'>1,650m<sup>2</sup> 이상</td>
 						</tr>
 					</table>

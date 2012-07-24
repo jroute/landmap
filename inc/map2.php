@@ -8,7 +8,7 @@
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=<?=$naver_api_key?>"></script>
 
 
-<div id="navermap" style="position:absolute;border:1px  solid #787878; width:770px; height:306px; margin:0px; top:580px; left:240px"></div>
+<div id="navermap" style="position:absolute;border:1px  solid #787878; width:515px; height:306px; margin:0px; top:580px; left:480px"></div>
 		<script type="text/javascript">
 			var oPoint = new nhn.api.map.LatLng(36.8936490, 126.6281630);
 			nhn.api.map.setDefaultPoint('LatLng');
@@ -22,7 +22,7 @@
 						activateTrafficMap : false,
 						activateBicycleMap : false,
 						minMaxLevel : [ 1, 14 ],
-						size : new nhn.api.map.Size(770, 306)
+						size : new nhn.api.map.Size(515, 306)
 					});
 			var mapZoom = new nhn.api.map.ZoomControl(); // - 줌 컨트롤 선언
 			themeMapButton = new nhn.api.map.ThemeMapBtn(); // - 자전거지도 버튼 선언

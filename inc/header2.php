@@ -12,7 +12,6 @@
 
 <title><?=$title?></title>
 
-<link rel="stylesheet" href="/css/default.css" />
 
 <link rel="stylesheet" href="/css/ui-lightness/jquery-ui-1.8.21.custom.css" />
 <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
