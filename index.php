@@ -73,7 +73,7 @@ $(document).ready(function(){
 			}
 		});
 		$("#edate").datepicker({
-			defaultDate: "+1w",
+//			defaultDate: "+1w",
 			changeMonth: true,
 			onSelect: function( selectedDate ) {
 				$("#sdate").datepicker( "option", "maxDate", selectedDate );
@@ -116,7 +116,8 @@ $(document).ready(function(){
 //		$('html').animate({scrollTop:300},1000);
 		var addr = '´çÁø½Ã'+$('.address:eq('+idx+')').text().replace(/\s/gi,'');
 		//alert($('.jiga:eq('+idx+')').val())
-		$('#open-gongsijiga').val(unNumberFormat($('.jiga:eq('+idx+')').val()));
+//		alert(unNumberFormat($('.jiga:eq('+((idx*2)+1)+')').val()))
+		$('#open-gongsijiga').val(unNumberFormat($('.jiga:eq('+((idx*2)+1)+')').val()));
 		$('#open-addr').val($('.addr:eq('+idx+')').text());
 		$('#open-address').val($('.address:eq('+idx+')').text());
 		$('#use').val($('.use:eq('+idx+')').attr('data'));
@@ -235,7 +236,7 @@ function setData(){
 	
 		idx = $('.seladdr').index($('.seladdr:checked'));
 //		alert(idx);
-		$('#open-gongsijiga').val(unNumberFormat($('.jiga:eq('+idx+')').val()));
+		$('#open-gongsijiga').val(unNumberFormat($('.jiga:eq('+((idx*2)+1)+')').val()));
 		$('#open-addr').val($('.addr:eq('+idx+')').text());
 		$('#open-address').val($('.address:eq('+idx+')').text());
 		$('#use').val($('.use:eq('+idx+')').attr('data'));

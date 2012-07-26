@@ -12,7 +12,7 @@ class Area {
 	}
 	
 	function getUMD(){
-	  $query      = "SELECT UMD_CD,UMD_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' order by UMD_NM DESC";
+	  $query      = "SELECT UMD_CD,UMD_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' order by UMD_CD ASC";
 	  trace("?/?/?? query : ".$query);
     $result     = mysql_query($query,$this->conn) or die(mysql_error());
     trace("?/?/?? rows : ".mysql_num_rows($result));
@@ -24,12 +24,12 @@ class Area {
 		mysql_free_result($result);		
 	  $umd = array_unique($umd);
 
-		asort($umd);	
+//		asort($umd);	
 		return $umd;	
 	}
 	
 	function getRI($q){
-	  $query      = "SELECT RI_CD,RI_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' AND RI_CD!='00' AND UMD_CD='".$q."' order by RI_NM ASC";
+	  $query      = "SELECT RI_CD,RI_NM FROM C_AREACODE WHERE SIDOSGG_CD='44270' AND RI_CD!='00' AND UMD_CD='".$q."' order by RI_CD ASC";
 	  trace("?¢´ query : ".$query);
     $result     = mysql_query($query,$this->conn);
     trace("?¢´ rows : ".mysql_num_rows($result));

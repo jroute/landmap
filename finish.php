@@ -462,15 +462,7 @@ while($data = mysql_fetch_assoc($res)):
 							</tr>
 						</table>
 						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
-						<table border='0' cellpadding='5' cellspacing='0'>
-							<tr>
-								<td><input type="image" src='img/dev_point_126.jpg' border='0'><br></td>
-								<td><img src='img/dev_point_127.jpg' border='0'><br></td>
-								<td align='center' width='10'><img src='img/end_point_169.jpg' border='0'><br></td>
-								<td><img src='img/dev_point_131.jpg' border='0'><br></td>
-								<td><img src='img/dev_point_132.jpg' border='0'><br></td>
-							</tr>
-						</table>
+						
 
 					</td>
 				</tr>
@@ -536,7 +528,7 @@ while($data = mysql_fetch_assoc($res)):
 		<td colspan="2" rowspan="13">
 			<img src="img/103_DevPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<div id='menu02' style='position:absolute;top:812px;left:41px;width:162px;'>
+			<div id='menu02' style='position:absolute;top:804px;left:41px;width:162px;'>
 			<img src="img/103_DevPt_24.jpg" width="157" height="161" alt="">
 			</div>
 			</td>
