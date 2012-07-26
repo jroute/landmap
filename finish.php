@@ -146,6 +146,9 @@ $(document).ready(function(){
 });
 </script>
 <form method="post" id="form" action="end.php">
+
+<input type="hidden" name="addrcd" value="<?php echo $_POST['addrcd'];?>" />
+
 <input type="hidden" name="open_data" value="<?php echo $_POST['open_data'];?>" />
 
 

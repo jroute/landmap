@@ -196,7 +196,8 @@
             // Enter, prevent form submission
             case 13:
               e.preventDefault();
-              context.pickListItem(context.selectedListItem());
+              //context.pickListItem(context.selectedListItem());
+			  context.hideList();
               return false;
           };
         }

@@ -19,14 +19,14 @@ if( @$_POST['open_jiga'] ) $open_area = @$_POST['open_jiga'];
 	width:60px;
 }
 .jiga {
-	width:115px;
+	width:80px;
 }
 ul>li {
 	white-space:nowrap;
 }
 </style>
 <link type="text/css" rel="stylesheet" href="/css/jquery.editable-select.css" />
-<script type="text/javascript" src="/js/jquery.editable-select.pack.js"></script>
+<script type="text/javascript" src="/js/jquery.editable-select.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -150,11 +150,13 @@ $(document).ready(function(){
 		var sdate = $('#sdate').val().split('-');
 		var edate = $('#edate').val().split('-');		
 		
+/*
 		if( sdate[0] != edate[0] ){
 			alert('기간은 같은 년도만 선택가능합니다.');
 			$('#edate').focus();
 			return;
 		}
+*/
 		
 		var area = 0;
 		var jiga = 0;		
@@ -241,10 +243,19 @@ function setData(){
 		$('#open-address').val($('.address:eq('+idx+')').text());
 		$('#use').val($('.use:eq('+idx+')').attr('data'));
 		$('#state').val($('.state:eq('+idx+')').attr('data'));	
+		
+		//대표 지번 셋
+		arrcd = $('.addrcd:eq(' + idx + ')').val().split(' ');
+		$('#UMD').val(arrcd[0]);
+		$('#RI').val(arrcd[1]);		
+		$('#G').val(arrcd[2]);		
+		$('#S').val(arrcd[3]);		
+		$('#E').val(arrcd[4]);		
+				
 }
 
 function printData(){
-
+	var addrcd = String('<?php echo $_POST['addrcd']?>').split(',');
 	var data = $('#open-data').val();
 	
 	if( data == '' ) return;
@@ -263,7 +274,7 @@ function printData(){
 		src += "<td width='100' align='center'>&nbsp;<span class='jimok'>"+row[6]+"</span></td>";
 			
 		src += "<td width='97' align='right'><input type='text' class='area number' maxLength='7' value='"+numberFormat(row[7])+"'/></td>";
-		src += "<td width='104' align='right'><select class='jiga'>";
+		src += "<td width='104' align='right'><select style='width:80px;font-size:8px;' class='jiga'>";
 		
 		var options = row[8].split('-');
 		for(o = 0 ; o < options.length-1; o++){
@@ -276,7 +287,9 @@ function printData(){
 		src += "</select></td>";
 		var checked='';
 		if( row[1] == $('#open-address').val() ) checked='checked="true"';
-		src += "<td width='89' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
+		src += "<td width='89' align='center'>";
+		src += "<input type='hidden' name='addrcd[]' class='addrcd' value='" + addrcd[i] + "'/>";			
+		src += "<input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
 		src += "<td width='50' align='left'>&nbsp;&nbsp;<a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
 		src += "</tr>";
 	
@@ -306,6 +319,7 @@ function printData(){
 		
 	}//end of for;
 	
+/*
 
 
 	$.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').val(),s:$('#S').val(),e:$('#E').val()},function(json)		{
@@ -319,6 +333,7 @@ function printData(){
 					));				
 				}
 			},'json');	
+*/
 						
 		$('.number').off();
 		$(".number").numeric();
@@ -396,6 +411,8 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 					$('#open-addr').val(json.addr.UMD_NM+' ' + json.addr.RI_NM);
 					$('#open-address').val(json.addr.UMD_NM+' '+json.addr.RI_NM+gbn+bungi);					
 					
+					addrcd = json.addr.UMD_CD+' '+json.addr.RI_CD+' '+ $('#G').val() + ' ' + $('#S').val() + ' ' +$('#E').val();
+
 					var checked = "";
 //					alert($('.seladdr:checked').val() == )
 					if( typeof $('.seladdr:checked').val() == 'undefined' ){
@@ -422,7 +439,9 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 				
 					
 	src += "</select></td>";
-	src += "<td width='89' align='center'><input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"' "+checked+"></td>";
+	src += "<td width='89' align='center'>";
+	src += "<input type='hidden' name='addrcd[]' class='addrcd' value='" + addrcd + "'/>";	
+	src += "<input type='radio' name='addr' class='seladdr' value='"+json.jiga.LAND_CD+"' "+checked+"></td>";
 	src += "<td width='50' align='left'>&nbsp;&nbsp;<a href='#del' class='del'><img src='img/del.jpg' border='0'><br></td>";
 	src += "</tr>";
 	/*
@@ -473,6 +492,13 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 			},'json');	
 			
 
+}
+
+function onEnter(){
+		if (event.keyCode == 13)
+		{
+			return false;
+		}
 }
 </script>
 <form id="form" onsubmit="return false" method="post" action="end.php">

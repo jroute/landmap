@@ -17,7 +17,7 @@ function setZoomOut(){
 function openMap(){
 	var point = oMap.getCenter();
 
-	window.open('http://map.naver.com/?dlevel=11&lat='+point.y+'&lng='+point.x+'&menu=location&mapMode=0&enc=b64');
+	window.open('http://map.naver.com/?dlevel=11&lat='+point.y+'&lng='+point.x+'&menu=location&mapMode=0&enc=b64&cadastral=on');
 }
 
 
@@ -36,7 +36,11 @@ function numberFormat(num) {
 
 //콤마제거
 function unNumberFormat(num) {
-	return (num.replace(/\,/g,""));
+	try{
+		return (num.replace(/\,/g,""));
+	}catch(e){
+		return 0;
+	}
 }
 
 
@@ -71,10 +75,10 @@ $(document).ready(function(){
 		$.post('/json/ri.php',{q:val},function(json){
 			i = 1;
 			$('#RI > option').remove();
-			$('#RI').append($('<option value="">리 검색</option>'));
-			if( json == false ) return;
-			for(cd in json){
-				document.getElementById('RI').options[i++] = new Option(json[cd],cd);
+			$('#RI').append($('<option value="">리 선택</option>'));
+			if( json == false || json.length == 0 ) return;
+			for(j  = 0 ; j < json.length ; j++){
+				document.getElementById('RI').options[i++] = new Option(json[j].RI_NM,json[j].RI_CD);
 			}
 		},'json');
 	});
@@ -87,9 +91,13 @@ $(document).ready(function(){
 		$.post('/json/ri.php',{q:val},function(json){
 			i = 1;
 			$('#RI2 > option').remove();
-			$('#RI2').append($('<option value="">리 검색</option>'));
-			for(cd in json){
-				document.getElementById('RI2').options[i++] = new Option(json[cd],cd);
+			$('#RI2').append($('<option value="">리 선택</option>'));
+
+			if( json == false || json.length == 0 ) return;
+
+			for(j  = 0 ; j < json.length ; j++){
+//			alert(json[j].RI_NM)
+				document.getElementById('RI2').options[i++] = new Option(json[j].RI_NM,json[j].RI_CD);
 			}
 		},'json');
 	});	
@@ -121,9 +129,9 @@ function setEventNumber(){
 	});
 	
 	
-	$('.jiga').unbind('keypress');
-	$('.jiga').unbind('keyup');
-	$('.jiga').keypress(function(e){	
+	$('input.jiga').unbind('keypress');
+	$('input.jiga').unbind('keyup');
+	$('input.jiga').keypress(function(e){	
 		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
 		if( key == 13 ) return;
 //alert(key)
@@ -134,7 +142,9 @@ function setEventNumber(){
       return false;
 		}	
 	})
-	$('.jiga').keyup(function(e){
+	$('input.jiga').keyup(function(e){
+		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;	
+		if( key == 13 ) return false;
 			$(this).val(numberFormat(unNumberFormat($(this).val())));
 
 	});

@@ -1,5 +1,11 @@
 <?php include "inc/header.php"; 
 
+if( isset($_POST['addrcd']) && is_array($_POST['addrcd']) ){
+	$addrcd = implode(',',$_POST['addrcd']);
+}else{
+	$addrcd = $_POST['addrcd'];
+}
+
 if( isset($_POST['UMD2']) ){
 	$UMD2 = $_POST['UMD2'];
 }else{
@@ -378,6 +384,9 @@ function loadStateData(){
 }
 </script>
 <form method="post" id="form" action="finish.php" onsubmit="return false;">
+
+<input type="hidden" name="addrcd" value="<?php echo $addrcd;?>" />
+
 <input type="hidden" name="open_data" value="<?php echo $_POST['open_data'];?>" />
 
 <input type="hidden" name="sdate" value="<?php echo $_POST['sdate'];?>" />
