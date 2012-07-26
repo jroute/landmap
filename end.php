@@ -131,6 +131,10 @@ $(document).ready(function(){
 		var addr = '당진시'+$('#open-address').val().replace(/\s/gi,'');
 		addrString = $('#open-address').text();
 		$.post('/api/naver.map.php',{query:addr},function(data){
+			if( typeof data.point == 'undefined' ){
+				alert('지도 좌표정보가 없습니다.');
+				return;
+			}
 			lng = data.point.x;
 			lat =	data.point.y;
 			oMap.clearOverlay();
@@ -146,10 +150,16 @@ $(document).ready(function(){
 
 	$('.seladdr').live('click',function(){
 		var idx = $('.seladdr').index($(this));
-		$('html').animate({scrollTop:300},1500);
+//		$('html').animate({scrollTop:300},1500);
 		var addr = '당진시'+$('.addr:eq('+idx+')').text().replace(/\s/gi,'');
 		addrString = $('.addr:eq('+idx+')').text();
 		$.post('/api/naver.map.php',{query:addr},function(data){
+		
+			if( typeof data.point == 'undefined' ){
+				alert('지도 좌표정보가 없습니다.');
+				return;
+			}
+					
 			lng = data.point.x;
 			lat =	data.point.y;
 			oMap.clearOverlay();
@@ -173,23 +183,27 @@ $(document).ready(function(){
 				try{
 				var j = 1;
 				$('#RI > option').remove();
-				$('#RI').append($('<option value="">리 검색</option>'));
-				if( json != false ){
-					for(cd in json){
+				$('#RI').append($('<option value="">리 선택</option>'));
+				
+			
 
-						if( '<?php echo $RI3;?>' == cd ){						
-							//document.getElementById('RI').options[j++] = new Option(json[cd],cd,true);					
-							$('#RI').append($('<option value="'+cd+'" selected="selected">'+json[cd]+'</option>'));					
-						}else{
-							//document.getElementById('RI').options[j++] = new Option(json[cd],cd);	
-							$('#RI').append($('<option value="'+cd+'">'+json[cd]+'</option>'));	
-						}
+							
+				if( json != false && json.length != 0){
+			for(j  = 0 ; j < json.length ; j++){
+			
+				if( '<?php echo @$RI3;?>' == json[j].RI_CD ){
+							$('#RI').append($('<option value="'+json[j].RI_CD+'" selected="selected">'+json[j].RI_NM+'</option>'));					
+				}else{
+							$('#RI').append($('<option value="'+json[j].RI_CD+'">x'+json[j].RI_NM+'</option>'));	
+				}
+							
+			}
 					}
 					
 					if($.browser.msie){
 						document.getElementById('RI').value = '<?php echo $RI3;?>';
 					}
-				}
+				
 				}catch(e){alert(e.message);}
 				
 			},'json');
@@ -199,14 +213,14 @@ $(document).ready(function(){
 			$.post('/json/ri.php',{q:umd2},function(json){
 				var i = 1;
 				$('#RI2 > option').remove();
-				$('#RI2').append($('<option value="">리 검색</option>'));
+				$('#RI2').append($('<option value="">리 선택</option>'));
 				
-				if( json != false ){
-					for(cd in json){
-						if( '<?php echo $RI2;?>' == cd ){
-							document.getElementById('RI2').options[i++] = new Option(json[cd],cd,true);					
+				if( json != false && json.length != 0 ){
+					for(j  = 0 ; j < json.length ; j++){
+						if( '<?php echo $RI2;?>' == json[j].RI_CD ){
+							document.getElementById('RI2').options[i++] = new Option(json[j].RI_NM,json[j].RI_CD,true);					
 						}else{
-							document.getElementById('RI2').options[i++] = new Option(json[cd],cd);
+							document.getElementById('RI2').options[i++] = new Option(json[j].RI_NM,json[j].RI_CD);
 						}
 					}
 					if($.browser.msie){
@@ -257,7 +271,7 @@ $(document).ready(function(){
 	
 	
 			if( $('#UMD').val() == '' ){ alert('읍/면/동 선택하십시오'); $('#UMD').focus(); return; }
-			if( $('#G').val() == '' ){ alert('필지구분을 선택하십시오'); $('#G').focus(); return; }			
+			//if( $('#G').val() == '' ){ alert('필지구분을 선택하십시오'); $('#G').focus(); return; }			
 			if( $('#S').val() == '' ){ alert('지번을 입력하십시오'); $('#S').focus(); return; }									
 
 			
@@ -346,16 +360,16 @@ function loadStateData(){
 										
 					var src = "<tr>"
 	src += "<td width='47' height='30' align='center'>"+($('#jiga-area > tbody > tr').length+1)+"</td>";
-	src += "<td width='290' align='left'>&nbsp;&nbsp;&nbsp;<span class='addr'>"+addr+ bungi +"</span></td>";
+	src += "<td width='290' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;<span class='addr'>"+addr+ bungi +"</span></td>";
 	
-	src += "<td width='128' align='left'>&nbsp;&nbsp;&nbsp;"+$('#USE option:selected').text()+"</td>";
-	src += "<td width='80' align='left'>&nbsp;&nbsp;&nbsp;"+$('#STATE option:selected').text()+"</td>";
+	src += "<td width='128' align='center'>&nbsp;&nbsp;"+$('#USE option:selected').text()+"</td>";
+	src += "<td width='80' align='center'>"+$('#STATE option:selected').text()+"</td>";
 
-	src += "<td width='128' align='left'>&nbsp;&nbsp;&nbsp;" + json.jiga[i].JIMOK+"</td>";	
-	src += "<td width='100' align='right'><span class='area'>"+numberFormat(json.jiga[i].LAND_AREA)+"</span></td>";	
+	src += "<td width='98' align='center'>" + json.jiga[i].JIMOK+"</td>";	
+	src += "<td width='95' align='right'><span class='area'>"+numberFormat(json.jiga[i].LAND_AREA)+"</span>&nbsp;</td>";	
 	
-	src += "<td width='70' align='right'><span class='jiga'>"+numberFormat(json.jiga[i].JIGA)+"</span></td>";
-	src += "<td width='42' align='center'><input type='radio' name='addr' class='seladdr'></td>";
+	src += "<td width='70' align='right'><span class='jiga'>"+numberFormat(json.jiga[i].JIGA)+"</span>&nbsp;</td>";
+	src += "<td width='75' align='center'><input type='radio' name='addr' class='seladdr'></td>";
 	src += "																</tr>";
 																	
 					$('#jiga-area > tbody').append($(src));				
@@ -473,7 +487,7 @@ function loadStateData(){
 											<td width='10'></td>
 											<td>
 <select id="G" name="G3">
-<option value="">필지구분 선택</option>
+<option value="1">필지구분 선택</option>
 <option value="1" <?php if( @$G3 == '1'):?>selected="selected"<?php endif;?>>일반지번</option>
 <option value="2" <?php if( @$G3 == '2'):?>selected="selected"<?php endif;?>>산</option>
 <option value="3" <?php if( @$G3 == '3'):?>selected="selected"<?php endif;?>>가지번</option>
@@ -482,7 +496,7 @@ function loadStateData(){
 											</td>
 											<td width='10'></td>
 											<td>
-<input type="text" name="S3" id="S" size="5" class="number2" value="<?php echo $S3;?>" maxlength="4" />~<input type="text" name="E3" id="E" size="5" value="<?php echo $E3;?>" maxlength="4" class="number2" />
+<input type="text" name="S3" id="S" size="5" class="number2" value="<?php echo $S3;?>" maxlength="4" /> - <input type="text" name="E3" id="E" size="5" value="<?php echo $E3;?>" maxlength="4" class="number2" />
 											</td>
 											<td width='10'></td>
 											<td>
@@ -495,16 +509,7 @@ function loadStateData(){
 							<!-- 주소검색 -->
 						</table>
 						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
-						<table border='0' cellpadding='5' cellspacing='0'>
-							<tr>
-								<td><a href="#" class="btn-back"><img src='img/end_point_166.jpg' border='0'></a><br></td>
-								<td><a href="#" class="btn-back"><img src='img/end_point_167.jpg' border='0'></a><br></td>
-								<td width='10' align='center'><img src='img/end_point_169.jpg' border='0'><br></td>
-								<td><input type="image" src='img/end_point_171.jpg' border='0' class="submit"><br></td>
-								<td><input type="image" src='img/end_point_172.jpg' border='0' class="submit"><br></td>
-							</tr>
-						</table>
-						<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
+						
 						<table border='0' cellpadding='0' cellspacing='0' width='1010' height='61'>
 							<tr>
 							
@@ -531,7 +536,7 @@ function loadStateData(){
 																				<td width='10'></td>
 																				<td>
 <select id="UMD2" name="UMD2">
-<option value="">읍/면/동 검색</option>
+<option value="">읍/면/동 선택</option>
 <?php foreach($umd as $cd=>$nm):?>
 <option value="<?=$cd?>" <?php if( $cd == $UMD2 ):?>selected="selected"<?php endif;?>><?=$nm?></option>
 <?php endforeach;?>
@@ -540,7 +545,7 @@ function loadStateData(){
 																				<td width='10'></td>
 																				<td>
 <select id="RI2" name="RI2">
-<option value="">리 검색</option>
+<option value="">리 선택</option>
 </select>
 																				</td>
 																				<td width='10'></td>
@@ -594,6 +599,16 @@ function loadStateData(){
 										</tr>
 									</table>
 									<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
+									<table border='0' cellpadding='5' cellspacing='0' width='1010'>
+										<tr>
+											<td align='right' width='450'><a href="#" class="btn-back"><img src='img/end_point_166.jpg' border='0'></a><br></td>
+											<td><a href="#" class="btn-back"><img src='img/end_point_167.jpg' border='0'></a><br></td>
+											<td width='10' align='center'><img src='img/end_point_169.jpg' border='0'><br></td>
+											<td><input type="image" src='img/end_point_171.jpg' border='0' class="submit"><br></td>
+											<td align='left'><input type="image" src='img/end_point_172.jpg' border='0' class="submit"><br></td>
+										</tr>
+									</table>
+									<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 									<table border='0' cellpadding='0' cellspacing='0' height='380' width='1010'>
 										<tr>
 											<td>
@@ -613,7 +628,7 @@ function loadStateData(){
 														<tr><td height='18'></td></tr>
 														<tr>
 															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
-																<?php echo $_POST['open_addr'];?>&nbsp;&nbsp;&nbsp;
+																<?php echo $_POST['open_addr'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -625,7 +640,7 @@ function loadStateData(){
 														<tr><td height='18'></td></tr>
 														<tr>
 															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
-																<input type="text" size="10" style='border:0px;height:24px;font-size:22px;font-weight:bold;' name="close_area" id="close_area" class="number" value="<?php echo number_format($_POST['open_area']);?>"/> m<sup>2</sup>&nbsp;&nbsp;&nbsp;
+																<input type="text" size="10" style='border:0px;height:24px;font-size:22px;font-weight:bold;' name="close_area" id="close_area" class="number" value="<?php echo number_format($_POST['open_area']);?>"/> m<sup>2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -637,7 +652,7 @@ function loadStateData(){
 														<tr><td height='18'></td></tr>
 														<tr>
 															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
-																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="<?php echo @number_format($close_jiga);?>"/>&nbsp;&nbsp;&nbsp;
+																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="<?php echo @number_format($close_jiga);?>"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>
@@ -700,15 +715,7 @@ function loadStateData(){
 							</tr>
 						</table>
 						<table border='0' cellpadding='0' cellspacing='0' height='12'><tr><td></td></tr></table>
-						<table border='0' cellpadding='5' cellspacing='0'>
-							<tr>
-								<td><a href="#" class="btn-back"><img src='img/end_point_166.jpg' border='0'></a><br></td>
-								<td><a href="#" class="btn-back"><img src='img/end_point_167.jpg' border='0'></a><br></td>
-								<td width='10' align='center'><img src='img/end_point_169.jpg' border='0'><br></td>
-								<td><input type="image" src='img/end_point_171.jpg' border='0' class="submit"><br></td>
-								<td><input type="image" src='img/end_point_172.jpg' border='0' class="submit"><br></td>
-							</tr>
-						</table>
+						
 
 					</td>
 				</tr>
@@ -773,7 +780,7 @@ function loadStateData(){
 		<td colspan="2" rowspan="13">
 			<img src="img/102_EndPt_23.jpg" width="11" height="294" alt=""></td>
 		<td colspan="3">
-			<div id='menu02' style='position:absolute;top:738px;left:41px;width:162px;'>
+			<div id='menu02' style='position:absolute;top:731px;left:41px;width:162px;'>
 			<img src="img/102_EndPt_24.jpg" width="157" height="161" alt=""><br>
 			<table border='0' cellpadding='0' cellspacing='0' height='5'><tr><td></td></tr></table>	
 			</td>

@@ -23,7 +23,7 @@ $(document).ready(function(){
     dayNamesMin: ['일','월','화','수','목','금','토'],
     weekHeader: 'Wk',
     dateFormat: 'yy-mm-dd', // [mm/dd/yy], [yy-mm-dd], [d M, y], [DD, d MM]
-    firstDay: 0,
+//    firstDay: 0,
     isRTL: false,
     showMonthAfterYear: true,
     yearSuffix: ''

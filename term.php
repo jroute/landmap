@@ -1,11 +1,15 @@
 <?php
 
-include "inc/header.php"; 
+include "inc/header2.php"; 
 $counter = new Counter();
 ?>
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#a0').click(function(){
+		$(document).scrollTop(0);
+	});
+
 	$('#a1').click(function(){
 		$(document).scrollTop(100);
 	});
@@ -23,7 +27,7 @@ $(document).ready(function(){
 <table id="__01" width="1281" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td colspan="33">
-			<img src="img/104_wrdPt_01.jpg" width="1280" height="26" alt=""></td>
+			<a name='topcls'><img src="img/104_wrdPt_01.jpg" width="1280" height="26" alt="" border='0'></a></td>
 		<td>
 			<img src="img/spacer.gif" width="1" height="26" alt=""></td>
 	</tr>
@@ -39,7 +43,7 @@ $(document).ready(function(){
 	<tr>
 		<td colspan="2" rowspan="7">&nbsp;</td>
 		<td colspan="25">
-			<img src="img/104_wrdPt_06.jpg" width="1048" height="48" alt=""></td>
+			<a name='top'><img src="img/104_wrdPt_06.jpg" width="1048" height="48" alt="" border='0'></a></td>
 		<td rowspan="13" valign='top'>
 			<img src="img/104_wrdPt_07.jpg" width="14" height="897" alt=""></td>
 		<td rowspan="23">
@@ -79,17 +83,162 @@ $(document).ready(function(){
 				<table border='0' cellpadding='0' cellspacing='0' width='1048' height='770'>
 				<tr>
 					<td align='center' valign='bottom'>
-						<table border='0' cellspacing='0' cellpadding='20' background='img/refbg.jpg' width='1011' height='770'>
+						<table border='0' cellspacing='0' cellpadding='0' background='img/refbg.jpg' width='1011' height='770'>
 							<tr><td align='center'>
 								<table border='0' cellspacing='10' cellpadding='0' width='1011' height='56'>
 									<tr><td bgcolor='#f6f6f6' style='font-family:dotum;font-size:14px;' align='center'>
-										<a href='./info.php#001' target='dev_info' id="a1"><b>개발부담금이란?</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href='./info.php#003' target='dev_info' id="a2"><b>납부의무자</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href='./info.php#004' target='dev_info' id="a3"><b>부과대상</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href='javascript:window.open("info2.php","_new","width=1024,height=768,left=500,top=300,scrollbars=yes,address=no");' target="_new"><b>사업종류</b></a>
+										<a style='color:#000000;' href='#001' id="a1"><b>개발부담금이란?</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a style='color:#000000;' href='#003' id="a2"><b>납부의무자</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a style='color:#000000;' href='#004' id="a3"><b>부과대상</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a style='text-decoration:underline;cursor:hand;' onclick='javascript:window.open("info2.php","info","width=820,height=700,scrollbars=yes");' target='_blank'><b>사업종류</b></a>
 									</td></tr>
 								</table>
-								<iframe name='dev_info' src='info.php' width='1001' height='2665' frameborder='0' scrolling='no'></iframe>
+								<table border='0' width='1001' cellpadding='0' cellspacing='20' bgcolor='#ffffff'>
+									<tr>
+										<td align='left'>
+											<table border='0' cellpadding='5' cellspacing='0'>
+												<tr>
+													<td><img src='img/ref_word_28.jpg' border='0'><br></td>
+													<td style='font-family:dotum;font-size:12pt;color:0971b0;font-weight:bold;'><a name='001'>개발부담금이란?</a></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td style='font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
+														개발부담금은 국가나 지방자치단체로부터 토지이용계획 변경이나 개발 인/허가 등을 받아 시행한 개발사업에서 발생한 지가상승 차익의 일부를 사회로 환수하기 위하여 부과됩니다.
+														<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' align='center'>개발부담금</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>개발이익 × 25%</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' align='center'>개발이익</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>종료시점지가 - (개시시점지가 + 정상상승분 + 개발비용)</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
+											<img src='img/sep55.jpg' border='0' width='950'><br><br>
+											<table border='0' cellpadding='5' cellspacing='0' width='100%'>
+												<tr>
+													<td><img src='img/ref_word_28.jpg' border='0'><br></td>
+													<td style='font-family:dotum;font-size:12pt;color:0971b0;font-weight:bold;'><a name='002'>개발부담금 흐름도</a></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td style='font-family:dotum;font-size:12px;color:888888;line-height:25px;' align='center'>
+														<img src='img/precess_dev.gif' border='0'>
+													</td>
+												</tr>
+											</table><br>
+											<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
+											<img src='img/sep55.jpg' border='0' width='950'><br><br>
+											<table border='0' cellpadding='5' cellspacing='0' width='100%'>
+												<tr>
+													<td><img src='img/ref_word_28.jpg' border='0'><br></td>
+													<td style='font-family:dotum;font-size:12pt;color:0971b0;font-weight:bold;'><a name='003'>납부의무자</a></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td style='font-family:dotum;font-size:12px;color:888888;line-height:50px;'>
+														개발부담금은 개발사업의 시행자가 납부의무를 집니다. 다만, 각 호의 어느 하나에 해당하는 경우에는 그에 해당하는 자가 개발부담금을 납부하셔야 합니다.(법 제 6 조)
+														<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>구분</td>
+																<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>납부의무자</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>개발사업을 시행하는 경우</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>사업시행자</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>개발사업을 위탁하거나 도급한 경우</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>위탁이나 도급을 한자</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>타인이 소유하는 토지를 입차하여 개발사업을 하는 경우</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>토지의 소유자</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>개발사업을 완료하기 전에 사업시행자, 위탁, 도급자 또는 토지소유자의 지위를 승계하는 경우</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>지위를 승계한 자</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>납부의무자가 조합원인 경우 조합이 해산되거나 조합의 재산이 부족한 경우</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>조합원(조합이 해산한 경우에는 해산 당사의 조합원을 말한다)</td>
+															</tr>
+														</table>
+														<font color='#ff0000'>※. 토지소유자</font> : 부과종료시점 당시 토지를 소유한 자(등기부등본에 기재된 토지소유자)
+														<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
+
+													</td>
+												</tr>
+											</table><br>
+											<img src='img/sep55.jpg' border='0' width='950'><br><br>
+											<table border='0' cellpadding='5' cellspacing='0' width='100%'>
+												<tr>
+													<td><img src='img/ref_word_28.jpg' border='0'><br></td>
+													<td style='font-family:dotum;font-size:12pt;color:0971b0;font-weight:bold;'><a name='004'>부과대상</a></td>
+												</tr>
+												<tr>
+													<td width='5'>&nbsp;</td>
+													<td style='font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
+														1. 인/허가 시기에 따른 부과대상
+														<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>사업지역</td>
+																<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>개발사업의 인가일</td>
+																<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>부과대상여부</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' align='center'>비수도권</td>
+																<td style='border-style:solid;border-color:#eeeeee;' align='center'>2006.01.01 이후 인가</td>
+																<td style='border-style:solid;border-color:#eeeeee;' align='center'>부과대상</td>
+															</tr>
+														</table><br>
+														2. 사업면적에 따른 부과대상
+														<table border='2' width='100%' cellpadding='10' cellspacing='0' style='border-style:solid;border-color:#dedede;font-family:dotum;font-size:12px;color:888888;line-height:25px;'>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>구분</td>
+																<td colspan='3' style='border-style:solid;border-color:#eeeeee;' bgcolor='#fafafa' align='center'>부과대상규모</td>
+															</tr>
+															<tr><td rowspan='4' style='border-style:solid;border-color:#eeeeee;' align='center'>도시지역</td></tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>1) 특별시 / 광역시</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>660m<sup>2</sup> 이상</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>2) 특별시 / 광역시 외 지역</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>990m<sup>2</sup> 이상</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;'>3) 개발제한구역</td>
+																<td style='border-style:solid;border-color:#eeeeee;'>1,650m<sup>2</sup> 이상</td>
+															</tr>
+															<tr>
+																<td style='border-style:solid;border-color:#eeeeee;' align='center'>4) 비도시지역</td>
+																<td colspan='3' style='border-style:solid;border-color:#eeeeee;'>1,650m<sup>2</sup> 이상</td>
+															</tr>
+														</table>
+														※ 고려사항 1 : 부과종료시점 당시 토지를 소유한 자(등기부등본에 기재된 토지소유자)<br>
+														&nbsp;&nbsp;&nbsp;- 위 1)의 지역 1m<sup>2</sup>는 2)의 지역의 1.5m<sup>2</sup>, 3)의 지역의 2.5m<sup>2</sup>로 환산<br>
+														&nbsp;&nbsp;&nbsp;- 위 2)의 지역 1m<sup>2</sup>는 2)의 지역의 1.5m<sup>2</sup>, 3)의 지역의 2.5m<sup>2</sup>로 환산<br><br>
+														※ 고려사항 2 : 부과대상 기준면적에 합산해야 하는 경우<br>
+														&nbsp;&nbsp;&nbsp;- 동일인(배우자, 직계존비속 포함)이 연접한 토지(동일인 소유의 연속되어 있는 일단의 토지인 경우 포함)에 하나의 개발사업이 종료된 후 5년이내에 개발사업의 인가<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;등을 받아 사실상 분할하여 사업을 시행하는 경우에는 각 사업의 대상 토지면적을 합산해야 합니다.(법 제5조 제2항 및 영 제4조 제1항)<br>
+														※ 고려사항 3 <br>
+														&nbsp;&nbsp;&nbsp;- 협동화사업단지조성사업(중소기업진흥 및 구매촉진에 관한 법률)의 경우에는 참여한 중소기업자별 면적의 토지에 각각의 개발사업이 시행되는 것으로 봅니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(영 제4조 제3항)<br>
+														&nbsp;&nbsp;&nbsp;- 시행령 별표1 제9호에 따른 지목변경이 수반되는 개발사업의 경우 사실상 또는 공부상 지목이 변경되는 면적을 부과대상 기준면적으로 합니다.(영 제4조 제4항)<br>
+														&nbsp;&nbsp;&nbsp;- 부과중지기간에 인가등을 받은 사업의 토지면적은 제외합니다.(영부칙 제4조)
+														<center><br><a href='#top'><img src='img/up2.jpg' border='0'><br></a></center>
+													</td>
+												</tr>
+											</table><br>
+											<img src='img/sep55.jpg' border='0' width='950'><br><br>
+										</td>
+									</tR>
+								</table>
+
 							</td></tr>
 						</table>
 						<table border='0' cellspacing='0' cellpadding='20' background='img/refbg.jpg' width='1011' height='4'>
@@ -129,14 +278,14 @@ $(document).ready(function(){
 			<table border='0' cellpadding='0' cellspacing='0' width='100%' bgcolor='#eef2f5' height='72'>
 				<tr><td height='2'></td><td height='2'></td></tr>
 				<tr>
-					<td height='20'></td><td style='color:333333;font-family:dotum;font-size:12px;'><a href="index.php" style='font-family:dotum;font-size:12px;'>개발부담금 가산정</a></td>
+					<td height='20'></td><td><a href="index.php" style='font-family:dotum;font-size:12px;'><font color='#333333' style='color:333333;font-family:dotum;font-size:12px;text-decoration:none;'>개발부담금 가산정</font></a></td>
 				</tR>
 				<tr>
-					<td width='20' height='18'><img src='./img/menu_blet.jpg' border='0'><br></td><td><a href="term.php" style='color:#b9010b;font-weight:bold;font-family:dotum;font-size:12px;'>개발부담금 안내</a></td>
+					<td width='20' height='18'><img src='./img/menu_blet.jpg' border='0'><br></td><td><a href="term.php" style='color:#b9010b;font-weight:bold;font-family:dotum;font-size:12px;text-decoration:none;'>개발부담금 안내</a></td>
 				</tR>
 				
 				<tr>
-					<td height='18'></td><td><a href="http://www.law.go.kr/lsStmdInfoP.do?lsiSeq=118682" target="_blank" style='color:333333;font-family:dotum;font-size:12px;'>관련법률</a></td>
+					<td height='18'></td><td><a href="http://www.law.go.kr/lsStmdInfoP.do?lsiSeq=118682" target="_blank" style='color:333333;font-family:dotum;font-size:12px;text-decoration:none;'><font color='#333333'>관련법률</font></a></td>
 				</tR>
 				<tr><td height='3'></td><td height='3'></td></tr>
 			</table>

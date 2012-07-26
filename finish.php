@@ -429,7 +429,7 @@ while($data = mysql_fetch_assoc($res)):
 																	<td>
 																		<table border='0' cellpadding='0' cellspacing='0' height='100%'>
 																			<tr>
-																				<td align='center'><a href="#zoom" id="zoom"><img src='img/plus.jpg' border='0'></a><a href="#zoom" id="zoom"><img src='img/minus.jpg' border='0'></a><br><br></td>
+																				<td align='center'><a href="#zoomin" id="zoomin"><img src='img/plus.jpg' border='0'></a><a href="#zoomout" id="zoomout"><img src='img/minus.jpg' border='0'></a><br><br></td>
 																			</tr>
 																			<tr>
 																				<td><img src='img/end_point_141.jpg' border='0'><br></td>

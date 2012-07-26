@@ -25,6 +25,7 @@ include "../class/gongsi_jiga.cls.php";
 
 	$jiga = new GongsiJiga();	
 
+	$data['yjiga'] = $jiga->getYearJiga($umd,$ri,$g,$s,$e);
 //	$data['jiga'] = $jiga->getAreaJiga($cd);
 	$data['jiga'] = $jiga->getAreaJiga($umd,$ri,$g,$s,$e);
 	if( $data['jiga'] ){

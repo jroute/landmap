@@ -12,8 +12,9 @@ include "../class/area.cls.php";
 
 	$ri = $area->getRI($q);
 
-	foreach($ri as $cd=>$nm){
-		$ri[$cd] = iconv('euc-kr','utf-8',$nm);
+	foreach($ri as $i=>$data){
+		$ri[$i] = $data;	
+		$ri[$i]['RI_NM'] = iconv('euc-kr','utf-8',$data['RI_NM']);
 	}
 	echo json_encode($ri);
 	

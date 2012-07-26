@@ -93,7 +93,17 @@ $(document).ready(function(){
 			}
 		},'json');
 	});	
+	
 
+	$('.number2').numeric();
+	setEventNumber();
+});
+
+
+
+
+function setEventNumber(){
+	$('.number').off();
 	$('.number').keypress(function(e){	
 		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
 		if( key == 13 ) return;
@@ -110,7 +120,23 @@ $(document).ready(function(){
 
 	});
 	
-
-	$('.number2').numeric();
 	
-});
+	$('.jiga').unbind('keypress');
+	$('.jiga').unbind('keyup');
+	$('.jiga').keypress(function(e){	
+		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+		if( key == 13 ) return;
+//alert(key)
+		if( (key >= 48 && key <= 58) || key == 8 || key == 37 || key == 39){
+			return true;
+		}else{
+
+      return false;
+		}	
+	})
+	$('.jiga').keyup(function(e){
+			$(this).val(numberFormat(unNumberFormat($(this).val())));
+
+	});
+	
+}

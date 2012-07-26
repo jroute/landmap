@@ -218,19 +218,13 @@ function setData(){
 		data += $('.state:eq('+idx+')').attr('data')+':'+$('.state:eq('+idx+')').text()+':'+$('.jimok:eq('+idx+')').text()+':';		
 		
 		if( typeof $('.jiga:eq('+((idx*2)+1)+')').val() == 'undefined' ){
-			data += unNumberFormat($('.area:eq('+idx+')').val())+':'+unNumberFormat($('.jiga:eq('+(idx)+')').val())+'-';		
+			data += unNumberFormat($('.area:eq('+idx+')').val())+':'+unNumberFormat($('.jiga:eq('+(idx)+')').val())+':';		
 		}else{
-			data += unNumberFormat($('.area:eq('+idx+')').val())+':'+unNumberFormat($('.jiga:eq('+((idx*2)+1)+')').val())+'-';
+			data += unNumberFormat($('.area:eq('+idx+')').val())+':'+unNumberFormat($('.jiga:eq('+((idx*2)+1)+')').val())+':';
 		}
-		
-		$('select.jiga:eq('+(idx)+') > option').each(function(oidx){
-			if( oidx == 0 ) return true;
-			data += $(this).attr('value')+'-';
-		});
-		data += ':';		
 		data += $('.seladdr:eq('+idx+')').val()+'|';		
 	});
-//alert(data);
+
 	$('#open-data').val(data);	
 	
 		idx = $('.seladdr').index($('.seladdr:checked'));
@@ -262,17 +256,7 @@ function printData(){
 		src += "<td width='100' align='center'>&nbsp;<span class='jimok'>"+row[6]+"</span></td>";
 			
 		src += "<td width='97' align='right'><input type='text' class='area number' maxLength='7' value='"+numberFormat(row[7])+"'/></td>";
-		src += "<td width='104' align='right'><select class='jiga'>";
-		
-		var options = row[8].split('-');
-		for(o = 0 ; o < options.length-1; o++){
-			if( o == 0 ){
-				src += "<option value='"+numberFormat(options[o])+"'>"+numberFormat(options[o])+"</option>";
-			}else{
-				src += "<option value='"+options[o]+"'>"+options[o]+"</option>";			
-			}
-		}
-		src += "</select></td>";
+		src += "<td width='104' align='right'><input type='text' style='width:80px;' class='jiga number' value='"+numberFormat(row[8])+"' /></td>";
 		var checked='';
 		if( row[1] == $('#open-address').val() ) checked='checked="true"';
 		src += "<td width='89' align='center'><input type='radio' name='addr' class='seladdr' value='"+row[9]+"' "+checked+"></td>";
@@ -280,28 +264,6 @@ function printData(){
 		src += "</tr>";
 	
 		$('#jiga-area > tbody').append($(src));	
-		
-		 $('.jiga:eq('+(($('#jiga-area > tbody > tr').length-1)*2)+')').editableSelect({
-		      bg_iframe: true,
-		      onSelect: function(list_item) {
-//		      alert(	$('.editable-select-options').index($(this).parent().parent()));
-
-
-						var idx = $('.editable-select-options').index(list_item.parent().parent());
-						$('#editable-select' + idx ).val(this.text.val().split('(')[0]);
-
-
-		      /*
-		        alert('List item text: '+ list_item.text());
-		        // 'this' is a reference to the instance of EditableSelect
-		        // object, so you have full access to everything there
-		        alert('Input value: '+ this.text.val());
-		        */
-		      },
-		      case_sensitive: false, // If set to true, the user has to type in an exact
-		                             // match for the item to get highlighted
-		      items_then_scroll: 10 // If there are more than 10 items, display a scrollbar
-		  });		
 		
 	}//end of for;
 	
