@@ -34,7 +34,7 @@ $edate = $_POST['edate'];
 list($sy,$sm,$sd) = explode('-',$sdate);
 list($ey,$em,$ed) = explode('-',$edate);
 
-$lastDate[2] = date('t',mktime(0,0,0,2,1,$ey));
+
 
 $close_area = (int)$_POST['close_area'];
 $close_jiga = (int)$_POST['close_jiga'];
@@ -58,26 +58,54 @@ trace('edate : '.$edate);
 trace('close total : '.$close_total." = $close_area*$close_jiga");
 
 $acc_total = $close_total;
-if( (int)$sm == 1 && (int)$sd == 1 ){}
-else{
-	$increases_total = 0;
-	for($m = 1; $m<=(int)$em ; $m++){
-		if( $m == $em ){
-			$total = (int)($acc_total*$increases[$m-1]/100*(int)$ed/$lastDate[$m]);
-			trace("END :  $m MON1 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".((int)$ed).")/".$lastDate[$m].")");			
-			$acc_total += $total;			
-			$increases_total += $total;
 
-		}else{
-			$total = (int)($acc_total*$increases[$m-1]/100*$lastDate[$m]/$lastDate[$m]);
-			trace("END :  $m MON2 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".($lastDate[$m]).")/".$lastDate[$m].")");						
-			$acc_total += $total;
-			$increases_total += $total;			
 
-		}
+$diffy = $ey - $sy;
+
+
+
+$increases_total = 0;
+//년도가 틀린 경우	
+
+	for($y = $sy ; $y <= $ey ; $y++ )
+	{
+		if( $y == $ey ){
 		
-	}
-}
+			$lastDate[2] = date('t',mktime(0,0,0,2,1,$y));
+			for($m = 1; $m<=(int)$em ; $m++){
+				if( $y == $ey && $m == $em ){
+					$total = (int)($acc_total*$increases[$m-1]/100*(int)$ed/$lastDate[$m]);
+					trace("END :  $m MON1 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".((int)$ed).")/".$lastDate[$m].")");			
+					$acc_total += $total;			
+					$increases_total += $total;
+//							echo $y.$m."<br />";
+				}else{
+//							echo $y.$m."<br />";
+					$total = (int)($acc_total*$increases[$m-1]/100*$lastDate[$m]/$lastDate[$m]);
+					trace("END :  $m MON2 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".($lastDate[$m]).")/".$lastDate[$m].")");						
+					$acc_total += $total;
+					$increases_total += $total;			
+		
+				}	
+//				echo $y.' '.$m. ' ' . $total.' '.$acc_total.'<br >';
+			}//end of for
+			
+		}
+		else
+		{
+		
+			$lastDate[2] = date('t',mktime(0,0,0,2,1,$y));		
+			for($m = 1; $m<=12 ; $m++){
+//				echo $y.' '.$m. ' ' . $total.' '.$acc_total.'<br >';
+				$total = (int)($acc_total*$increases[$m-1]/100*$lastDate[$m]/$lastDate[$m]);
+				trace("END :  $m MON2 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".($lastDate[$m]).")/".$lastDate[$m].")");						
+				$acc_total += $total;
+				$increases_total += $total;			
+			}//end of for		
+		
+		}
+	
+	}//end of for($y = $m ; $y <= $em ; $y++)
 $close_cal_jiga =  $close_total+$increases_total;
 trace("END JIGA :  ".$close_cal_jiga." =  ".$close_total."+".$increases_total);			
 ?>
@@ -271,7 +299,7 @@ $(document).ready(function(){
 														<td>
 															<table border='0' cellpadding='0' cellspacing='0' >
 																<tr>
-																	<td><input type='text' name='devcost' id="devcost" class="number" style='text-align:right;width:174px;' value="<?php echo number_format($calcost[1]);?>"></td>
+																	<td><input type='text' name='devcost' id="devcost" class="number" style='text-align:right;width:164px;' value="<?php echo number_format($calcost[1]);?>"> 원</td>
 																	<td width='10'></td>
 																	<td><a href="#caljiga" id="caljiga"><img src='img/dev_point_34.jpg' border='0'></a><br></td>
 																	<td width='10'></td>
@@ -305,20 +333,20 @@ while($data = mysql_fetch_assoc($res)):
 												<table border='0' cellpadding='0' cellspacing='0' width='462' >
 													<tr>
 														<td width='10'></td>
-														<td align='left' width="200"><img src='img/dev_point_45.jpg' border='0'><br></td>
+														<td align='left' width='126'><img src='img/dev_point_45.jpg' border='0'><br></td>
 														<td width='10'></td>
-														<td align='right'>
-															<span id="dev-impact-fees" style='font-size:22px;font-weight:bold;color:#0078ff;' >0</span>
+														<td align='right' style='font-size:20px;font-family:dotum;font-weight:bold;color:#0078ff;'>
+															<span id="dev-impact-fees" style='font-size:22px;font-weight:bold;color:#0078ff;'>0</span> 원
 														</td>
 														<td width='10'></td>
 													</tr>
 													<tr><td height='12'></td><td height='12'></td><td height='12'></td><td width='12'></td><td height='12'></td></tr>
 													<tr>
 														<td width='10'></td>
-														<td align='left'><img src='img/dev_point_58.jpg' border='0'><br></td>
+														<td align='left' width='126'><img src='img/dev_point_58.jpg' border='0'><br></td>
 														<td width='10'></td>
-														<td style='font-size:22px;font-weight:bold;color:#0078ff;' align='right'>
-															<span id="reduction-impact-fees" style='font-size:22px;font-weight:bold;color:#0078ff;' >0</span>
+														<td style='font-size:20px;font-family:dotum;font-weight:bold;color:#0078ff;' align='right' width='300'>
+															<span id="reduction-impact-fees" style='font-size:22px;font-weight:bold;color:#0078ff;'>0</span> 원
 														</td>
 														<td width='10'></td>
 													</tr>
@@ -380,13 +408,13 @@ while($data = mysql_fetch_assoc($res)):
 								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd' width='150'>개시시점 금액</td>
 								
 									
-								<td align='right' style='font-size:16px;font-weight:bold;' bgcolor='#ffffff' ><?php echo number_format($_POST['open_cal_jiga']);?>&nbsp;&nbsp;</td>
+								<td align='right' style='font-size:16px;font-weight:bold;' bgcolor='#ffffff' ><?php echo number_format($_POST['open_cal_jiga']);?> 원&nbsp;&nbsp;</td>
 								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>종료시점 금액</td>
-								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><?php echo number_format($close_cal_jiga);?>&nbsp;&nbsp;</td>
+								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><?php echo number_format($close_cal_jiga);?> 원&nbsp;&nbsp;</td>
 								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>개발비용 금액</td>
-								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><span id="print-devcost" style='font-size:16px;font-weight:bold;color:#0078ff;' ><?php echo number_format($calcost[1]);?></span>&nbsp;&nbsp;</td>
+								<td align='right'  style='font-size:16px;font-family:dotum;font-weight:bold;color:#0078ff;'  bgcolor='#ffffff'><span id="print-devcost" style='font-size:16px;font-weight:bold;color:#0078ff;' ><?php echo number_format($calcost[1]);?></span> 원&nbsp;&nbsp;</td>
 								<td style='font-family:dotum;font-size:11px;font-color:#777777;' bgcolor='#f1f7fd'>정상지가 상승분</td>
-								<td align='right' style='font-size:16px;font-weight:bold;'  bgcolor='#ffffff'><span id="print-increases" style='font-size:16px;font-weight:bold;color:#0078ff;' >0</span>&nbsp;&nbsp;</td>
+								<td align='right'  style='font-size:16px;font-family:dotum;font-weight:bold;color:#0078ff;'  bgcolor='#ffffff'><span id="print-increases" style='font-size:16px;font-weight:bold;color:#0078ff;' >0</span> 원&nbsp;&nbsp;</td>
 										
 							</tr>
 							
@@ -422,7 +450,7 @@ while($data = mysql_fetch_assoc($res)):
 															<table border='0' cellpadding='0' cellspacing='0' height='15'><tr><td></td></tr></table>
 															<table border='0' cellpadding='0' cellspacing='0'>
 																<tr>
-																	<td width='750'>
+																	<td width='765'>
 																	
 																		
 																	</td>
@@ -492,7 +520,7 @@ while($data = mysql_fetch_assoc($res)):
 	<tr>
 		<td rowspan="16">
 			<img src="img/103_DevPt_18.jpg" width="30" height="779" alt=""></td>
-		<td colspan="4">
+		<td colspan="4" valign='bottom'>
 			<img src="img/103_DevPt_19.jpg" width="162" height="29" alt=""></td>
 		<td rowspan="3">
 			<img src="img/103_DevPt_20.jpg" width="6" height="485" alt=""></td>
@@ -500,7 +528,7 @@ while($data = mysql_fetch_assoc($res)):
 			<img src="img/spacer.gif" width="1" height="29" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="4">
+		<td colspan="4" valign='top'>
 <!-- 레프트 메뉴 시작 ------------------------------------------------------------------------------------------------------------------------------------>
 			<table border='0' cellpadding='0' cellspacing='0' width='100%' bgcolor='#eef2f5' height='73'>
 				<tr><td height='3'></td><td height='3'></td></tr>

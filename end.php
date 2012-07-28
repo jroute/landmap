@@ -661,7 +661,7 @@ function loadStateData(){
 														<tr><td height='18'></td></tr>
 														<tr>
 															<td align='right' style='font-size:16px;font-weight:bold;font-family:dotum;'>
-																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="<?php echo @number_format($close_jiga);?>"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																<input type="text" name="close_jiga"  style='border:0px;height:24px;font-size:22px;font-weight:bold;' size="10"  class="number" id="close-jiga" value="<?php echo @number_format($close_jiga);?>"/> ¿ø&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															</td>
 														</tr>
 														<tr><td height='30' align='center'><img src='img/sep3.jpg' border='0'></td></tr>

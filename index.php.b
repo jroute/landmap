@@ -374,7 +374,7 @@ $.post('/json/jiga_year.php',{umd:$('#UMD').val(),ri:$('#RI').val(),g:$('#G').va
 		src += "<td width='150' align='center'>&nbsp;<span class='state' data='"+json.jiga.LAND_USE+"'>"+json.jiga.STATE+"</span></td>";
 		src += "<td width='100' align='center'>&nbsp;<span class='jimok'>"+json.jiga.JIMOK+"</span></td>";
 			
-	src += "<td width='97' align='right'><input type='text' class='area number' value='"+json.jiga.LAND_AREA+"'/></td>";
+	src += "<td width='97' align='right'><input type='text' class='area number' value='"+numberFormat(json.jiga.LAND_AREA)+"'/></td>";
 	src += "<td width='104' align='right'><select class='jiga' style='width:80px;font-size:8px;'><option value='"+numberFormat(json.jiga.JIGA)+"'>"+numberFormat(json.jiga.JIGA)+"</option>";
 	
 				for(j = 0 ;  j < json.yjiga.length; j++ ){
