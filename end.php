@@ -96,17 +96,20 @@ else{
 			trace("start :  $m MON1 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".((int)$sd).")/".$lastDate[$m].")");
 			$acc_total += $total;			
 			$increases_total += $total;
-
+//			echo $total.' '.$increases_total.' '.$m.' '.$lastDate[$m].'<br />';
 		}else{
 			$total = (int)($acc_total*$increases[$m-1]/100*$lastDate[$m]/$lastDate[$m]);			
 			trace("start :  $m MON2 ".$total." = (".$acc_total."*".$increases[$m-1]."/100*(".($lastDate[$m]).")/".$lastDate[$m].")");			
 			$acc_total += $total;
 			$increases_total += $total;			
-
+//			echo $total.' '.$increases_total.' '.$m.' '.$lastDate[$m].'<br />';
 		}
 		
 	}
 }
+//echo $open_total.'<br />';
+//echo $acc_total.'<br />';
+//echo $increases_total.'<br />';
 $open_cal_jiga =  $open_total+$increases_total;
 trace("open jiga :  ".$open_cal_jiga." =  ".$open_total."+".$increases_total);			
 ?>
@@ -200,7 +203,7 @@ $(document).ready(function(){
 				if( '<?php echo @$RI3;?>' == json[j].RI_CD ){
 							$('#RI').append($('<option value="'+json[j].RI_CD+'" selected="selected">'+json[j].RI_NM+'</option>'));					
 				}else{
-							$('#RI').append($('<option value="'+json[j].RI_CD+'">x'+json[j].RI_NM+'</option>'));	
+							$('#RI').append($('<option value="'+json[j].RI_CD+'">'+json[j].RI_NM+'</option>'));	
 				}
 							
 			}

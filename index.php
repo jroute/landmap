@@ -249,7 +249,14 @@ function setData(){
 		//대표 지번 셋
 		arrcd = $('.addrcd:eq(' + idx + ')').val().split(' ');
 		$('#UMD').val(arrcd[0]);
+/*
+		try{
 		$('#RI').val(arrcd[1]);		
+		}catch(e){
+*/
+			$('#RI').append($('<option value="'+arrcd[1]+'"></option>'));
+			$('#RI').val(arrcd[1]);				
+//		}
 		$('#G').val(arrcd[2]);		
 		$('#S').val(arrcd[3]);		
 		$('#E').val(arrcd[4]);		

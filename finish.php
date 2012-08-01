@@ -158,7 +158,7 @@ $(document).ready(function(){
 			
 			if( val == '' ) return;
 
-			red_impact_fees = unNumberFormat($('#devimpactfees').val())*val/100;
+			red_impact_fees = unNumberFormat($('#devimpactfees').val()) - (unNumberFormat($('#devimpactfees').val())*val/100);
 
 			$('#reduction-impact-fees').text(numberFormat(String(red_impact_fees)));
 
